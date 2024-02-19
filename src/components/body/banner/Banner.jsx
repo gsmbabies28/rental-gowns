@@ -5,10 +5,9 @@ const Banner = ({title, text, btnTxt}) => {
     <div className="relative text-center">
       <div id="banner">
           <div className="mx-auto grid md:grid-cols-2  bg-gradient-to-r from-gray-900 to-gray-700  w-full lg:h-screen">
-              <Background image="../../../src/assets/background.jpg" />
+              <Background image="/assets/background.jpg" />
             
-              <Background image="../../../src/assets/background2.jpg" />
-          
+              <Background image="/assets/background2.jpg" />
           </div>
       </div>
       <BannerText title={title} text={text} btnTxt={btnTxt} />

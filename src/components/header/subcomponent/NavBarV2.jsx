@@ -50,7 +50,7 @@ export default function NavBarV2() {
                 
                     <Link to="/">
                       <img
-                        src="/src/assets/logo.png"
+                        src="/assets/logo.png"
                         alt="Sunflower"
                         className="h-10 ms-12 sm:ms-0"
                       />
