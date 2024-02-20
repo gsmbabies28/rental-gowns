@@ -5,33 +5,35 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { CiSearch, CiUser } from "react-icons/ci";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import SearchBar from "./SearchBar";
-import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import { useState } from "react";
+
 
 const navigation = [
-  { name: "Gowns", href: "/gowns", current: false },
-  { name: "Tuxedo", href: "#", current: false },
-  { name: "Services", href: "#", current: false },
+  { name: "Gowns", href: "/collections/gowns", current: false },
+  { name: "Tuxedo", href: "/collections/tuxedos", current: false },
+  { name: "Services", href: "/services", current: false },
 ];
 
 export default function NavBarV2() {
-  const [showSearch, setShowSearch] = useState(false);
+  const [showSearch, setShowSearch] = useState('hidden');
+
   const handleShowSearch = () => {
-    setShowSearch(true)
+    setShowSearch('block')
   }
   const handleCloseSearch = () => {
-    setShowSearch(false)
+    setShowSearch('hidden')
   }
-  console.log(showSearch)
   return (
     <>
-    { showSearch ? 
-      (<div className={'flex mx-auto items-center p-4 w-full h-full z-99 bg-white-200 '}>
-        <SearchBar /> <button onClick={handleCloseSearch}><IoMdClose className="text-3xl cursor-pointer"/></button>
-      </div>) :
-      (<Disclosure as="nav" className="bg-white">
+      <Disclosure as="nav" className="bg-white">
         {({ open }) => (
           <>
+            <div id="myModal" className={`modal pt-7 ${showSearch}`}>
+              <div className="m-auto w-auto h-auto bg-white flex justify-center px-3">
+                <SearchBar /> <button onClick={handleCloseSearch}><IoMdClose className="text-3xl cursor-pointer"/></button>
+              </div>
+            </div>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -59,13 +61,13 @@ export default function NavBarV2() {
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
-                        <a
+                        <NavLink
                           key={item.name}
-                          href={item.href}
+                          to={item.href}
                           className="text-black hover:bg-cyan-500 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                         >
                           {item.name}
-                        </a>
+                        </NavLink>
                       ))}
                     </div>
                   </div>
@@ -103,8 +105,7 @@ export default function NavBarV2() {
             </Disclosure.Panel>
           </>
         )}
-      </Disclosure>)
-    }
+      </Disclosure>
     </>
   );
 }

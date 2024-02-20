@@ -13,12 +13,12 @@ import RegisterPage from "./pages/RegisterPage";
 import ResetPassword from "./pages/ResetPassword";
 import Header from './components/header/Header';
 import AnnouncementBar  from './components/header/subcomponent/AnnouncementBar';
-import NavBar from './components/header/subcomponent/NavBar';
 import NavBarV2 from './components/header/subcomponent/NavBarV2';
 import ShopPage from "./pages/ShopPage";
 import CartPage from "./pages/CartPage";
 
 export default function App() {
+
   return (
 
       <BrowserRouter>
@@ -28,13 +28,18 @@ export default function App() {
       </Header>  
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/collections">
+            <Route path="all"  element={<ShopPage />} />
+            <Route path="gowns" element={<ShopPage />} />
+            <Route path="tuxedos" element={<ShopPage />} />
+          </Route>
           <Route path="/account">
             <Route index path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />  
             <Route path="recover" element={<ResetPassword />} />
             <Route path="*" element={<h1 className="text-5xl text-center p-12">Page not found</h1>} />
           </Route>
-          <Route path="/gowns" element={<ShopPage />} />
+          <Route path="/services" element={<CartPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="*" element={<h1 className="text-5xl text-center p-12">Page not found</h1>} />
         </Routes>  
