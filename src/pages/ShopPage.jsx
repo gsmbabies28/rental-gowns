@@ -67,8 +67,14 @@ const ShopPage = () => {
     const currentRecords = products.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(products.length / recordsPerPage)
     const pageNumbers = [...Array(nPages + 1).keys()].slice(1)
+    const [showSideTab, setShowSideTab] = useState('hidden');
 
-   
+    const handleShowTab = () => {
+      setShowSideTab('block')
+    }
+    const handleCloseTab = () => {
+      setShowSideTab('hidden')
+    }
 
     const goToNextPage = () => {
         if(currentPage !== nPages) 
@@ -90,7 +96,9 @@ const ShopPage = () => {
         <div id="filter-area" className="mt-10 flex justify-between">
           <div className="flex block lg:hidden">
             <CiFilter className="text-3xl"/>
-            <span className="hover:underline underline-offset-4">Filter and sort </span>
+            <button type="button" onClick={handleShowTab}>
+              <span className="hover:underline underline-offset-4">Filter and sort </span>
+            </button>
           </div>
           <p className="space-x-5 hidden md:block"><span>Filter:</span><span>Availability</span><span>Color</span></p>
           <p className="space-x-5 hidden md:block"><span>Sort by:</span><span>Featured</span><span>26 products</span></p>
@@ -102,7 +110,7 @@ const ShopPage = () => {
             {products?.map((item,i) => <ProductList key={i} product={item}/>)}
         </div>
         <Pagination />
-        <SideTab />
+        <SideTab showSideTab={showSideTab} onCloseTab={handleCloseTab}/>
     </div>
   )
 }
