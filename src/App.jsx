@@ -41,6 +41,7 @@ export default function App() {
           </Route>
           <Route path="/services" element={<CartPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/products/*" element={<CartPage />} />
           <Route path="*" element={<h1 className="text-5xl text-center p-12">Page not found</h1>} />
         </Routes>  
 
