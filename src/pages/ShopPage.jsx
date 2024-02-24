@@ -1,5 +1,5 @@
 import { useState } from "react"
-import ProductList from "../components/body/products/ProductList";
+import ProductList from "../components/utils/ProductList";
 import Pagination from "../components/utils/Pagination";
 import { CiFilter } from "react-icons/ci";
 import SideTab from "../components/utils/SideTab";

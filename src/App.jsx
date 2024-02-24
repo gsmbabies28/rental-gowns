@@ -16,9 +16,10 @@ import AnnouncementBar  from './components/header/subcomponent/AnnouncementBar';
 import NavBarV2 from './components/header/subcomponent/NavBarV2';
 import ShopPage from "./pages/ShopPage";
 import CartPage from "./pages/CartPage";
+import ProductDetails from "./pages/ProductDetails";
 
 export default function App() {
-
+  
   return (
 
       <BrowserRouter>
@@ -39,9 +40,9 @@ export default function App() {
             <Route path="recover" element={<ResetPassword />} />
             <Route path="*" element={<h1 className="text-5xl text-center p-12">Page not found</h1>} />
           </Route>
-          <Route path="/services" element={<CartPage />} />
+          <Route path="/services" element={<ShopPage />} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/products/*" element={<CartPage />} />
+          <Route path="/products/:name" element={<ProductDetails />} />
           <Route path="*" element={<h1 className="text-5xl text-center p-12">Page not found</h1>} />
         </Routes>  
 

@@ -3,6 +3,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    
   ],
   theme: {
     extend: {},
@@ -13,5 +14,6 @@ export default {
     strategy: 'base', // only generate global styles
     strategy: 'class', // only generate classes
   }),
+  
   ],
 }

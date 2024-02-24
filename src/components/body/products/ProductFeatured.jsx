@@ -1,4 +1,4 @@
-import ProductList from "./ProductList"
+import ProductList from "../../utils/ProductList"
 
 const ProductFeatured = ({products}) => {
   return (
@@ -10,7 +10,6 @@ const ProductFeatured = ({products}) => {
           <ProductList key={i} product={product} />
         ))}
       </div>
-
     </div>
   </div>
   )
