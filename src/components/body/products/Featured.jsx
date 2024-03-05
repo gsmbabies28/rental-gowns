@@ -2,43 +2,22 @@ import ProductFeatured from "./ProductFeatured"
 import NewArrivalProduct from "./NewArrivalProduct"
 import VideoProducts from "./VideoProducts"
 import Testimonials from "./Testimonials"
-const products = [
-    {
-      id: 1,
-      name: 'Earthen Bottle',
-      href: '#',
-      price: '$48',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
-      imageAlt: 'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
-    },
-    {
-      id: 2,
-      name: 'Nomad Tumbler',
-      href: '#',
-      price: '$35',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-      imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
-    },
-    {
-      id: 3,
-      name: 'Focus Paper Refill',
-      href: '#',
-      price: '$89',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
-      imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
-    },
-    {
-      id: 4,
-      name: 'Machined Mechanical Pencil',
-      href: '#',
-      price: '$35',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-      imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-    },
-    // More products...
-  ]
+import axios from 'axios'
+import { useEffect, useState } from "react"
 
 const Featured = () => {
+
+  const[productsFeatured, setProductsFeatured] = useState(null)
+
+  useEffect( () => {
+    //get featured products
+    axios.get(`${import.meta.env.VITE_APP_API_URL}/products/featured`)
+    .then(res=>{
+      setProductsFeatured(res.data.msg)
+    })
+    .catch(err=>console.error(err))
+  },[])
+  
   return (
     <div className='mt-10 p-2'>
 
@@ -50,8 +29,8 @@ const Featured = () => {
                 Functional handbags made of luxurious materials to improve people's lives in small but mighty ways.
             </p>
         </div>
-        <ProductFeatured products={products}/>
-        <NewArrivalProduct products={products} />
+        <ProductFeatured products={productsFeatured}/>
+        <NewArrivalProduct />
         <VideoProducts />
         <Testimonials />
     </div>

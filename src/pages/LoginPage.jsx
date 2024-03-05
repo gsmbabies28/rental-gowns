@@ -4,8 +4,8 @@ const LoginPage = () => {
 
   return (
     <div id="login-page" className="text-center w-full my-8 px-8 sm:px-0">
-      {/* <LoginForm /> */}
-      <LoggedPage />
+      <LoginForm />
+      {/* <LoggedPage /> */}
     </div>
   )
 }

@@ -1,11 +1,10 @@
-import { Fragment } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { CiSearch, CiUser } from "react-icons/ci";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import SearchBar from "./SearchBar";
-import { IoMdClose } from "react-icons/io";
+import { IoMdClose, IoMdLink } from "react-icons/io";
 import { useState } from "react";
 
 
@@ -92,14 +91,13 @@ export default function NavBarV2() {
             <Disclosure.Panel className="sm:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2">
                 {navigation.map((item) => (
-                  <Disclosure.Button
+                  <Link
                     key={item.name}
-                    as="a"
-                    href={item.href}
+                    to={item.href}
                     className="text-gray-300 hover:bg-cyan-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                   >
                     {item.name}
-                  </Disclosure.Button>
+                  </Link>
                 ))}
               </div>
             </Disclosure.Panel>
