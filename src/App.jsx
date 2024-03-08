@@ -45,7 +45,6 @@ export default function App() {
           <Route path="/products/:name" element={<ProductDetails />} />
           <Route path="*" element={<h1 className="text-5xl text-center p-12">Page not found</h1>} />
         </Routes>  
-
         <hr className='px-2 mx-auto' />
         <Footer />
       </BrowserRouter>

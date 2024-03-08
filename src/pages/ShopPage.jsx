@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import ProductList from "../components/utils/ProductList";
 import Pagination from "../components/utils/Pagination";
-import { CiFilter } from "react-icons/ci";
 import SideTab from "../components/utils/SideTab";
 import { useLocation } from "react-router-dom";
+import Filter from "../components/utils/Filter";
 import axios from "axios";
 
 
@@ -75,19 +75,7 @@ const ShopPage = () => {
         <h1 className="text-4xl py-2">
           {title}
         </h1>
-        <div id="filter-area" className="mt-10 flex justify-between">
-          <div className="flex block lg:hidden">
-            <CiFilter className="text-3xl"/>
-            <button type="button" onClick={handleShowTab}>
-              <span className="hover:underline underline-offset-4">Filter and sort </span>
-            </button>
-          </div>
-          <p className="space-x-5 hidden md:block"><span>Filter:</span><span>Availability</span><span>Color</span></p>
-          <p className="space-x-5 hidden md:block"><span>Sort by:</span><span>Featured</span></p>
-          <div>
-            <h1>{products[currentPage-1]?.length} products</h1>
-          </div>
-        </div>
+        <Filter handleShowTab={handleShowTab} numOfProducts={products?.msg?.length}/> 
         {
           products.msg?.length === 0 ? (<h1 className="p-5 text-4xl text-center mx-auto">Products not found</h1>) 
           :

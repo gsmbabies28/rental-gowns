@@ -11,6 +11,20 @@ const ProductDetails = () => {
     .then(res=>setProduct(res.data.msg))
   },[]);
 
+  const handleAddToCart = (id) => {
+    if(localStorage.length){
+      let products = JSON.parse(localStorage.getItem('sunflower_cartItems'));
+      products[id] = 1;
+      console.log(products);
+            // products[id] = 1;
+      localStorage.setItem('sunflower_cartItems', JSON.stringify(products))
+    } else {
+      const product = new Object();
+      product[id] = 1;
+      localStorage.setItem('sunflower_cartItems', JSON.stringify(product))
+    }
+  }
+
   return (
     <>
       {/* component */}
@@ -169,7 +183,9 @@ const ProductDetails = () => {
                 <span className="title-font font-medium text-2xl text-gray-900">
                   &#8369;{product.price}
                 </span>
-                <button className="flex ml-auto text-white bg-cyan-500 border-0 py-2 px-6 focus:outline-none hover:bg-cyan-600 rounded">
+                <button
+                  onClick={()=>handleAddToCart(product._id)}
+                  className="flex ml-auto text-white bg-cyan-500 border-0 py-2 px-6 focus:outline-none hover:bg-cyan-600 rounded">
                   Add to cart
                 </button>
                 

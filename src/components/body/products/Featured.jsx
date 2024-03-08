@@ -11,7 +11,7 @@ const Featured = () => {
 
   useEffect( () => {
     //get featured products
-    axios.get(`${import.meta.env.VITE_APP_API_URL}/products/featured`)
+    axios.get(`${import.meta.env.VITE_APP_API_URL}/products/featured/all`)
     .then(res=>{
       setProductsFeatured(res.data.msg)
     })

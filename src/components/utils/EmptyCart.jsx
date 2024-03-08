@@ -10,7 +10,7 @@ function EmptyCart() {
 
   useEffect( () => {
     //get featured products
-    axios.get(`${import.meta.env.VITE_APP_API_URL}/products/alsoLikeProduct`)
+    axios.get(`${import.meta.env.VITE_APP_API_URL}/products/alsoLikeProduct/all`)
     .then(res=>{
       setProducts(res.data.msg)
     })
@@ -19,9 +19,6 @@ function EmptyCart() {
 
   return (
     <div className="bg-white mt-12 mx-auto text-center">
-        <h1 className="text-5xl">
-            Your cart is empty
-        </h1>
         <Link to={'/collections/all'}>
           <Button text="Continue shopping" margin="10" />
         </Link>
