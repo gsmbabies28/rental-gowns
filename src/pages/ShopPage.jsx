@@ -71,7 +71,7 @@ const ShopPage = () => {
     }
 
   return (
-    <div className='md:container mx-auto my-5 px-2'>
+    <div className='mx-auto my-5 px-2 md:px-8'>
         <h1 className="text-4xl py-2">
           {title}
         </h1>

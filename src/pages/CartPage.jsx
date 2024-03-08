@@ -1,13 +1,20 @@
 import EmptyCart from "../components/utils/EmptyCart";
 import Cart from "../components/utils/Cart";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const CartPage = () => {
   const cartItems = JSON.parse(localStorage.getItem("sunflower_cartItems"));
+  const [cartList, setCartList] = useState(true)
   let productsList=[];
+  const removeProduct = (id) => {
+    delete cartItems[id]
+    setCartList(false)
+    localStorage.setItem('sunflower_cartItems', JSON.stringify(cartItems))
+  }
+
   for(let prop in cartItems){
-    productsList.push(<Cart key={prop} id={prop} quantity={cartItems[prop]} />)
+    productsList.push(<Cart key={prop} id={prop} quantity={cartItems[prop]}  handleRemove = {removeProduct} />)
   }
 
   return (

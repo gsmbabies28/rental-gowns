@@ -45,7 +45,7 @@ const products = [
   // More products...
 ];
 
-const Cart = ({id, quantity}) => {
+const Cart = ({id, quantity, handleRemove}) => {
 
   const [ currentQuantity, setQuantity ] = useState(quantity)
   const [ product , setProduct] = useState('')
@@ -77,8 +77,8 @@ const Cart = ({id, quantity}) => {
 
           <div className="sm:flex col-span-2 md:col-span-1 justify-self-start text-left space-y-3">
             <div id="description" className="md:hidden">
-              <p>{products[0].name}</p>
-              <p>{products[0].price}</p>
+              <p>{product.name}</p>
+              <p>Php {product.price}</p>
               <p>Color: brown</p>
               <p>Size: medium</p>
             </div>
@@ -102,7 +102,7 @@ const Cart = ({id, quantity}) => {
                   </button>
                 </div>
                 <div className="justify-self-center">
-                  <button type="button">
+                  <button type="button" onClick={() => handleRemove(product._id)}>
                     <IoTrashOutline />
                   </button>
                 </div>
