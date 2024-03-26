@@ -9,7 +9,7 @@ const NewArrivalProduct = () => {
             <div className="grid grid-row-2 md:grid-cols-3 gap-4 mt-10 pt-5 m-auto">
                     <div className='md:col-span-2 h-full'>
                     <a href="#" >
-                        <img className="h-full bg-contain" src='/assets/background.jpg' alt="" />
+                        <img className="h-full bg-contain" src='/assets/gown.jpg' alt="" />
                         <h5 className='mt-1'>Gowns <span>-{'>'}</span></h5>
                     </a>
                     </div>

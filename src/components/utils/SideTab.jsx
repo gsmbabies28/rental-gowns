@@ -1,6 +1,7 @@
 import { IoMdClose } from "react-icons/io";
 import Button from "./Button";
 const SideTab = ({showSideTab, onCloseTab,products}) => {
+    
   return (
     <div className={`modal ${showSideTab}`}>
         <div className='w-4/5 bg-white h-full fixed right-0 text-center pt-3'>
@@ -8,7 +9,7 @@ const SideTab = ({showSideTab, onCloseTab,products}) => {
                 <h1>
                     Filter and sort
                 </h1>
-                <p>{products} products</p>
+                <p>{products?.length} products</p>
                 <button type='button' onClick={onCloseTab}>
                     <IoMdClose className="absolute right-3 top-2  text-3xl cursor-pointer"/>
                 </button>
@@ -25,7 +26,7 @@ const SideTab = ({showSideTab, onCloseTab,products}) => {
                     </li>
                     <li className="border-b-2 text-left space-y-2 pb-2">
                         <span className="font-bold text-center">Price Range</span>
-                        <ul>
+                        <ul className="space-y-2">
                             <li className="space-x-2"><input id="min" name="price" type="number" className="form-input rounded text-black" placeholder="from"/></li>
                             <li className="space-x-2"><input id="max" name="price" type="number" className="form-input rounded text-black" placeholder="to"/></li>
                         </ul>
@@ -46,7 +47,7 @@ const SideTab = ({showSideTab, onCloseTab,products}) => {
                 <button type="button" onClick={onCloseTab}>
                     <span className="text-lg underline underline-offset-4 cursor-pointer">Cancel</span>
                 </button>
-                <Button margin="8" text="Apply"/>
+                <Button margin="8" text="Apply" handleFunc={onCloseTab} type='button' />
             </div>
         </div>
         <div className="w-full h-full z-50" onClick={onCloseTab}>

@@ -12,16 +12,20 @@ const ProductDetails = () => {
   },[]);
 
   const handleAddToCart = (id) => {
+    
+    const currentTime = new Date().getTime();
+    const expirationTime = currentTime + 60 * 60 * 1000;
+
     if(localStorage.length){
-      let products = JSON.parse(localStorage.getItem('sunflower_cartItems'));
-      products[id] = 1;
-      console.log(products);
-            // products[id] = 1;
-      localStorage.setItem('sunflower_cartItems', JSON.stringify(products))
+      let product = JSON.parse(localStorage.getItem('sunflower_cartItems'));
+      product[id] = 1;  
+      localStorage.setItem('sunflower_cartItems', JSON.stringify(product))
+      localStorage.setItem('time', expirationTime)
     } else {
       const product = new Object();
       product[id] = 1;
       localStorage.setItem('sunflower_cartItems', JSON.stringify(product))
+      localStorage.setItem('time', expirationTime)
     }
   }
 
