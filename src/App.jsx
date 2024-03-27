@@ -41,7 +41,7 @@ export default function App() {
             <Route path="recover" element={<ResetPassword />} />
             <Route path="*" element={<h1 className="text-5xl text-center p-12">Page not found</h1>} />
           </Route>
-          <Route path="services" element={<ShopPage />} />
+          <Route path="services" element={<h1>hello</h1>} />
           <Route path="cart" element={<CartPage />} />
           <Route path="/products/:name" element={<ProductDetails />} />
           <Route path="*" element={<h1 className="text-5xl text-center p-12">Page not found</h1>} />
