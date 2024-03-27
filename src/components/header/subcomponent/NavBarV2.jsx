@@ -37,6 +37,8 @@ export default function NavBarV2() {
 
   const onSearch = (e) => {
     setShowSearch(false)
+    var body = document.getElementsByTagName('body')[0];
+    body.style.overflowY = ''
     navigate(`/collections/all?search=${e}`)
   }
 
@@ -102,7 +104,9 @@ export default function NavBarV2() {
                               className="text-black hover:bg-cyan-500 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                             >
                               <Link 
-                                to={link.href}>{link.name}
+                                to={link.href}
+                              >
+                                {link.name}
                               </Link>
                             </li>
                           )

@@ -29,10 +29,11 @@ export default function App() {
       </Header>  
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/collections">
+          <Route path="collections" element={ <ShopPage /> }>
             <Route path="all"  element={<ShopPage />} />
             <Route path="gowns" element={<ShopPage />} />
             <Route path="tuxedos" element={<ShopPage />} />
+            <Route path="top" element={<ShopPage />} />
           </Route>
           <Route path="/account">
             <Route index path="login" element={<LoginPage />} />
@@ -40,8 +41,8 @@ export default function App() {
             <Route path="recover" element={<ResetPassword />} />
             <Route path="*" element={<h1 className="text-5xl text-center p-12">Page not found</h1>} />
           </Route>
-          <Route path="/services" element={<ShopPage />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route path="services" element={<ShopPage />} />
+          <Route path="cart" element={<CartPage />} />
           <Route path="/products/:name" element={<ProductDetails />} />
           <Route path="*" element={<h1 className="text-5xl text-center p-12">Page not found</h1>} />
         </Routes>  
