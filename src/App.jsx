@@ -29,6 +29,8 @@ const router = createBrowserRouter(
           <Route path="gowns" element={<ShopPage />} />
           <Route path="tuxedos" element={<ShopPage />} />
           <Route path="top" element={<ShopPage />} />
+          <Route path="bottom" element={<ShopPage />} />
+          <Route path="set" element={<ShopPage />} />
         </Route>
         <Route path="account">
           <Route index path="login" element={<LoginPage />} />
@@ -62,11 +64,7 @@ export default function App() {
 }
 
 
-
-
-
-
-
+//Layout Component 
 function Layout() {
   return (
     <>

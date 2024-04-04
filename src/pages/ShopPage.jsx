@@ -13,109 +13,93 @@ const ShopPage = () => {
   const location = useLocation();
   const [showSideTab, setShowSideTab] = useState("hidden");
   const [products, setProducts] = useState([]);
-
   const [search, setSearch] = useSearchParams();
   const queryParamValue = parseInt(search.get("page")) || 1;
-  const searchQuery = search.get("search");
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
+  const searchQuery = search.get("search");
   
+  const fetchProduct = (queries,source) => {
+    search.entries().forEach((item,index)=>{
+        if(index==0 && queries==''){
+          queries = `?${item[0]}=${item[1]}`
+        } else {
+          queries+= `&${item[0]}=${item[1]}`
+        }
+      });
+    console.log(queries)
+ 
+      axios
+      .get(
+        `${
+          import.meta.env.VITE_APP_API_URL
+        }/products${queries}`,
+        { cancelToken: source.token } // Pass the cancel token to the request
+      )
+      .then((res) => {
+        setProducts(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        if (axios.isCancel(err)) {
+          console.log("Request canceled:", err.message);
+        } else {
+          console.error(err);
+        }
+      });
+   
+  }
+
+
   useEffect(() => {
     let source = axios.CancelToken.source(); // Create a cancel token source
+    let queries = '';
 
     switch (location.pathname) {
+
       case "/collections":
         console.log("yawa");
         break;
+
       case "/collections/all":
         setTitle("Products");
-        console.log("all endpoint");
-        console.log(location.search);
-        axios
-          .get(
-            `${
-              import.meta.env.VITE_APP_API_URL
-            }/products?page=${queryParamValue}`,
-            { cancelToken: source.token } // Pass the cancel token to the request
-          )
-          .then((res) => {
-            setProducts(res.data);
-            setLoading(false);
-          })
-          .catch((err) => {
-            if (axios.isCancel(err)) {
-              console.log("Request canceled:", err.message);
-            } else {
-              console.error(err);
-            }
-          });
+        fetchProduct(queries,source);
+        console.log("all endpoint"  );
         break;
+
       case "/collections/gowns":
         setTitle("Gowns");
         console.log("gown endpoint");
-        axios
-          .get(
-            `${
-              import.meta.env.VITE_APP_API_URL
-            }/products?category=gown&page=${queryParamValue}`,
-            { cancelToken: source.token } // Pass the cancel token to the request
-          )
-          .then((res) => {
-            setProducts(res.data);
-            setLoading(false);
-          })
-          .catch((err) => {
-            if (axios.isCancel(err)) {
-              console.log("Request canceled:", err.message);
-            } else {
-              console.error(err);
-            }
-          });
+        queries = `?category_class=gown`;
+        fetchProduct(queries,source);
         break;
+
       case "/collections/tuxedos":
         setTitle("Tuxedo");
         console.log("tuxedo endpoint");
-        axios
-          .get(
-            `${
-              import.meta.env.VITE_APP_API_URL
-            }/products?category=tuxedo&page=${queryParamValue}`,
-            { cancelToken: source.token } // Pass the cancel token to the request
-          )
-          .then((res) => {
-            setProducts(res.data);
-            setLoading(false);
-          })
-          .catch((err) => {
-            if (axios.isCancel(err)) {
-              console.log("Request canceled:", err.message);
-            } else {
-              console.error(err);
-            }
-          });
+        queries = `?category_class=tuxedo`
+        fetchProduct(queries,source);
         break;
 
         case "/collections/top":
           setTitle("Top");
           console.log("top endpoint");
-          axios
-            .get(
-              `${
-                import.meta.env.VITE_APP_API_URL
-              }/products?category=top&page=${queryParamValue}`,
-              { cancelToken: source.token } // Pass the cancel token to the request
-            )
-            .then((res) => {
-              setProducts(res.data);
-              setLoading(false);
-            })
-            .catch((err) => {
-              if (axios.isCancel(err)) {
-                console.log("Request canceled:", err.message);
-              } else {
-                console.error(err);
-              }
-            });
+          queries = '?category_type=top'
+          fetchProduct(queries,source);
+          break;
+        
+        case "/collections/bottom":
+          setTitle("Top");
+          console.log("top endpoint");
+          queries = '?category_type=top'
+          fetchProduct(queries,source);
+          break;
+
+        case "/collections/set":
+          setTitle("Top");
+          console.log("top endpoint");
+          queries = '?category_type=set'
+          fetchProduct(queries,source);
           break;
     }
 
@@ -124,7 +108,7 @@ const ShopPage = () => {
       setLoading(true);
       source.cancel("Component unmounted"); // Cancel the ongoing request when the component unmounts
     };
-  }, [queryParamValue, location.pathname]);
+  }, [queryParamValue, location.pathname,search]);
 
   const handleShowTab = () => {
     setShowSideTab("block");

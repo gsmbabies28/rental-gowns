@@ -6,13 +6,13 @@ const ProductDetails = () => {
   
   const param = useParams();
   const [product, setProduct] = useState('');
+  console.log(param.name)
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_APP_API_URL}/products/details/${ param.name }`)
     .then(res=>setProduct(res.data.msg))
   },[]);
 
   const handleAddToCart = (id) => {
-    
     const currentTime = new Date().getTime();
     const expirationTime = currentTime + 60 * 60 * 1000;
 
@@ -28,19 +28,19 @@ const ProductDetails = () => {
       localStorage.setItem('time', expirationTime)
     }
   }
-
+  console.log(product)
   return (
     <>
       {/* component */}
       <section className="text-gray-700 body-font overflow-hidden bg-white">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 py-8 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
               alt="ecommerce"
               className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
-              src={`${import.meta.env.VITE_APP_API_URL}${product.img}`}
+              src={`${import.meta.env.VITE_APP_API_URL}/images/${product.img}`}
             />
-            <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+            <div className="lg:w-1/2 w-full lg:pl-10 lg:py-2 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
                 BRAND NAME
               </h2>

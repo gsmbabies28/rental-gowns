@@ -6,10 +6,30 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import SearchBar from "./SearchBar";
 import { IoMdClose } from "react-icons/io";
 import { useState } from "react";
-import { defaultLink } from "../../utils/NavItemsLink";
+// import {defaultLink}  from "../../utils/NavItemsLink";
 import MenuDropDown from "../../utils/MenuDropDown";
 import { useNavigate } from "react-router-dom";
 
+//temp try kung mo gana inig deploy sa vercel
+const navCollection = [
+  { name: "Gowns", href: "/collections/gowns", current: false },
+  { name: "Tuxedos", href: "/collections/tuxedos", current: false },
+  { name: "Cocktail", href: "/collection/cocktail", current: false },
+];
+
+const navRent = [
+  { name: "All", href: "/collections/all", current: false },
+  { name: "Top", href: "/collections/top", current: false },
+  { name: "Bottom", href: "/collections/bottom", current: false },
+  { name: "Set", href: "/collections/set", current: false },
+
+];
+
+export const defaultLink = [  
+  { name: "Rent", items: navRent, current: false },
+  { name: "Collection", items:navCollection, current: false },
+  { name: "Services", href: "/services", current: false },
+];
 
 export default function NavBarV2() {
   const [showSearch, setShowSearch] = useState(false);
@@ -31,7 +51,6 @@ export default function NavBarV2() {
   const handleNavLinkToggle = (links) => {
     isShow.state = !isShow.state;
     isShow.link = links;
-    console.log(isShow);
     setIsShow({ ...isShow });
   };
 

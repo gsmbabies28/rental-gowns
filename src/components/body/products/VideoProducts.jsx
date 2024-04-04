@@ -3,7 +3,17 @@
 const VideoProducts = () => {
   return (
     <div id="video-prod" className="mx-auto mt-12">
-       <iframe className="aspect-video mx-auto py-5 w-full max-w-6xl"  src="https://www.youtube.com/embed/y2Dx8pqcWIM" title="Wedding dress store commercial. Best For Brides." frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+      
+      <iframe
+      className="aspect-video mx-auto py-5 w-full max-w-6xl"
+      src="https://www.youtube.com/embed/y2Dx8pqcWIM"
+      title="Wedding dress store commercial. Best For Brides."
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowFullScreen
+      >
+      </iframe>
+
     </div>
   )
 }

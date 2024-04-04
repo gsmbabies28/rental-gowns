@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft ,MdOutlineLastPage, MdOutlineFirstPage  } from "react-icons/md";
 
-export default function Pagination({page, currentPage}) {
+export default function Pagination({page, currentPage=1}) {
 
   return ( 
     <div className="mt-5 flex items-center justify-between border-gray-200 bg-white px-4 py-4 sm:px-6">
