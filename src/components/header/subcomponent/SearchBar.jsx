@@ -1,20 +1,20 @@
 import { CiSearch } from "react-icons/ci";
 import { useState } from "react";
+import { MdQrCode2 } from "react-icons/md";
 
 
 const SearchBar = ({handleSearch}) => {
-  const [search, setSearch] = useState('')
-
+  const [query, setQuery] = useState('')
   return (
     <div className="flex justify-center items-center space-x-2 p-3 w-full">
         <input 
           autoFocus
           type="search" 
-          value={search}
-          onChange={e=>setSearch(e.target.value)}
+          value={query}
+          onChange={e=>setQuery(e.target.value)}
           onKeyDown={e=>{
             if(e.key==="Enter") {
-              handleSearch(search)
+              handleSearch(query)
             }
           }}
           name="search-product" 
@@ -22,7 +22,7 @@ const SearchBar = ({handleSearch}) => {
         /> 
         <CiSearch 
           className="cursor-pointer text-2xl active:text-slate-400"
-          onClick={e=>handleSearch(search)}
+          onClick={()=>handleSearch(query)}
         />
     </div>
   )

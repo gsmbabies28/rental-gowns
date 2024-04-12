@@ -70,7 +70,7 @@ export default function NavBarV2() {
             { showSearch &&
               (<div id="myModal" className='modal pt-7 h-full overflow-hidden'>
                 <div className="m-auto w-auto bg-white flex justify-center px-3">
-                  <SearchBar handleShow={setShowSearch} handleSearch={onSearch}/>
+                  <SearchBar handleSearch={onSearch}/>
                   <button onClick={handleCloseSearch}>
                     <IoMdClose className="text-3xl cursor-pointer" />
                   </button>

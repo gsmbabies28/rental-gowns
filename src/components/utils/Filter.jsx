@@ -1,7 +1,8 @@
 import { CiFilter } from "react-icons/ci";
 
 
-const Filter = ({handleShowTab, numOfProducts}) => {
+const Filter = ({handleShowTab, numOfProducts, setSearch}) => {
+  
   return (
     <div id="filter-area" className="mt-10 flex justify-between">
       <div className="flex block lg:hidden">

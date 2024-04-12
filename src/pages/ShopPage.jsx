@@ -13,7 +13,7 @@ const ShopPage = () => {
   const location = useLocation();
   const [showSideTab, setShowSideTab] = useState("hidden");
   const [products, setProducts] = useState([]);
-  const [search, setSearch] = useSearchParams();
+  const [search, setSearch] = useSearchParams({});
   const queryParamValue = parseInt(search.get("page")) || 1;
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
@@ -27,8 +27,7 @@ const ShopPage = () => {
           queries+= `&${item[0]}=${item[1]}`
         }
       });
-    console.log(queries)
- 
+    
       axios
       .get(
         `${
@@ -117,21 +116,46 @@ const ShopPage = () => {
   const handleCloseTab = () => {
     setShowSideTab("hidden");
   };
-  const onSearch = (e) => {
-    setSearch({ search: e });
+  
+  const handleSearch = (value) => {
+    setSearch({search:value})
   };
+  
+  const handleQueries = (key,value,action) => {
+   
+    switch(action){
+      case true: 
+        search.delete('page')
+        search.append(key,value)
+        break;  
+      case false:
+        search.delete('page')
+        search.delete(key,value);
+        break;
 
+      default:
+        if(value!=''){
+          search.set(key,value);
+        } else {
+          search.delete(key)
+        }
+    }
+
+    setSearch(search)
+  }
+  
   return (
     
     <div className="mx-auto my-5 px-2 md:px-8">
       {searchQuery ? (
-        <SearchBar handleSearch={onSearch} />
+        <SearchBar handleSearch={handleSearch} />
       ) : (
         <h1 className="text-4xl py-2">{title}</h1>
       )}
       <Filter
         handleShowTab={handleShowTab}
         numOfProducts={products?.msg?.length}
+        handleSearch = {handleSearch}
       />
       { loading ? 
         (
@@ -162,11 +186,15 @@ const ShopPage = () => {
       <Pagination
         page={products.totalPage}
         currentPage={queryParamValue}
+        handleQueries = {handleQueries}
       />
       <SideTab
         showSideTab={showSideTab}
         onCloseTab={handleCloseTab}
         products={products.msg}
+        handleQueries = {handleQueries}
+        searchQuery = {search}
+        setSearch = {setSearch}
       />
     </div>
      

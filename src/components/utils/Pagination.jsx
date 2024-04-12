@@ -1,28 +1,32 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft ,MdOutlineLastPage, MdOutlineFirstPage  } from "react-icons/md";
-
-export default function Pagination({page, currentPage=1}) {
+export default function Pagination({page, currentPage=1, handleQueries}) {
 
   return ( 
     <div className="mt-5 flex items-center justify-between border-gray-200 bg-white px-4 py-4 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden items-baseline">
-        <button disabled>
-          <Link
-            to={`?page=${currentPage-1}`}
+        
+          <button
+            onClick={()=>{
+              handleQueries('page',currentPage-1);
+            }}
             className={`${currentPage==1 && 'pointer-events-none'} relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50`}
           >
             Previous
-          </Link>
-        </button>
+          </button>
+       
         <span className='text-sm'>{currentPage} of {page}</span>
-        <Link
-          to={`?page=${currentPage+1}`}
+        <button
+          onClick={()=>{
+            handleQueries('page',currentPage+1);
+          }}
           className={`${currentPage >= page && 'pointer-events-none'} relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50`}
         >
           Next
-        </Link>
+        </button>
       </div>
 
+      {/* for desktop filter */}
       <div className='mx-auto hidden sm:inline-block'>
         <div className='flex items-center gap-5'>
 
