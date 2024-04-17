@@ -25,6 +25,7 @@ export default function MyDropdown({link}) {
                 <NavLink
                   className={`${active && 'bg-cyan-100'}`}
                   to={item.href}
+                  state = {item.name}
                 >
                   {item.name}
                 </NavLink>

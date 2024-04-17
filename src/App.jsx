@@ -27,6 +27,9 @@ const router = createBrowserRouter(
         <Route path="collections" element={<ShopPage />}>
           <Route path="all" element={<ShopPage />} />
           <Route path="gowns" element={<ShopPage />} />
+          <Route path="wedding" element={<ShopPage />} />
+          <Route path="casual" element={<ShopPage />} />
+          <Route path="cocktail" element={<ShopPage />} />
           <Route path="tuxedos" element={<ShopPage />} />
           <Route path="top" element={<ShopPage />} />
           <Route path="bottom" element={<ShopPage />} />

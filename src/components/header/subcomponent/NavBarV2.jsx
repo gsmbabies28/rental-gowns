@@ -14,7 +14,9 @@ import { useNavigate } from "react-router-dom";
 const navCollection = [
   { name: "Gowns", href: "/collections/gowns", current: false },
   { name: "Tuxedos", href: "/collections/tuxedos", current: false },
-  { name: "Cocktail", href: "/collection/cocktail", current: false },
+  { name: "Cocktail", href: "/collections/cocktail", current: false },
+  { name: "Wedding", href: "/collections/wedding", current: false },
+  { name: "Casual", href: "/collections/casual", current: false },
 ];
 
 const navRent = [
@@ -25,7 +27,7 @@ const navRent = [
 
 ];
 
-export const defaultLink = [  
+const defaultLink = [  
   { name: "Rent", items: navRent, current: false },
   { name: "Collection", items:navCollection, current: false },
   { name: "Services", href: "/services", current: false },
@@ -84,7 +86,7 @@ export default function NavBarV2() {
               <div className="relative flex h-16 items-center justify-between">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-cyan-700 border border-slate-600 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
                     {open ? (
@@ -122,11 +124,12 @@ export default function NavBarV2() {
                               key = {link.name}
                               className="text-black hover:bg-cyan-500 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                             >
-                              <Link 
+                              <NavLink 
                                 to={link.href}
+                                state = {link.name}
                               >
                                 {link.name}
-                              </Link>
+                              </NavLink>
                             </li>
                           )
                         }
@@ -159,18 +162,19 @@ export default function NavBarV2() {
                   <hr />
                   if (link.hasOwnProperty("items")) {
                     return (
-                      <Link
+                      <NavLink
                         to={link.href}
                         onClick={() => handleNavLinkToggle(link?.items)}
                         className="w-full"
                         key={link.name}
+                        state = {link.name}
                       >
                         <li
                           className="text-gray-400 hover:bg-cyan-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                         >
                             <span>{link.name}</span>
                         </li>
-                      </Link>
+                      </NavLink>
                     );
                   } else {
                     return (
@@ -178,7 +182,10 @@ export default function NavBarV2() {
                         key={link.name}
                         className="text-gray-400 hover:bg-cyan-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                       >
-                        <Link to={link.href}>{link.name}</Link>
+                        <NavLink 
+                          to={link.href}
+                          state = {link.name}
+                        >{link.name}</NavLink>
                       </li>
                     );
                   }
