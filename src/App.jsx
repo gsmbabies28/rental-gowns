@@ -20,6 +20,7 @@ import ShopPage from "./pages/ShopPage";
 import CartPage from "./pages/CartPage";
 import ProductDetails from "./pages/ProductDetails";
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -46,7 +47,7 @@ const router = createBrowserRouter(
             }
           />
         </Route>
-        <Route path="services" element={<h1>hello</h1>} />
+        <Route path="faq" element={<h1>hello</h1>} />
         <Route path="cart" element={<CartPage />} />
         <Route path="products/:name" element={<ProductDetails />} />
         <Route

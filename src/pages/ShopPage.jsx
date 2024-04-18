@@ -7,6 +7,7 @@ import Filter from "../components/utils/Filter";
 import axios from "axios";
 import SearchBar from "../components/header/subcomponent/SearchBar";
 import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import {ShopPageContextProvider} from "../UseContext/ShopPageContext";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +16,7 @@ const ShopPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showSideTab, setShowSideTab] = useState({show:false, filter:false,sort:false});
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({});
   const [search, setSearch] = useSearchParams({});
   const queryParamValue = parseInt(search.get("page")) || 1;
   const [loading, setLoading] = useState(true);
@@ -47,6 +48,8 @@ const ShopPage = () => {
           console.log("Request canceled:", err.message);
         } else {
           console.error(err);
+          setProducts({msg:'error'})
+          setLoading(false)
         }
       });
    
@@ -112,12 +115,19 @@ const ShopPage = () => {
           queries = '?category_eventType=casual'
           fetchProduct(queries,source);
         break;
+
+        case "/collections/cocktail":
+          setTitle("Cocktail");
+          console.log("cocktail endpoint");
+          queries = '?category_eventType=cocktail'
+          fetchProduct(queries,source);
+        break;
     }
 
     // Cleanup function
     return () => {
-      setLoading(true);
       source.cancel("Component unmounted"); // Cancel the ongoing request when the component unmounts
+      setLoading(true);
     };
   }, [queryParamValue, location.pathname,search]);
 
@@ -142,7 +152,7 @@ const ShopPage = () => {
     }
   };  
 
-  
+
   const handleQueries = (key,value,action) => {
     console.log(key,value,action);
     switch(action){
@@ -173,7 +183,7 @@ const ShopPage = () => {
   const handleNavigate = (link) => {
       navigate(`/${link}`);
   }
-  // console.log(location)
+  console.log(products.msg)
   return (
       <div className="mx-auto my-5 px-2 md:px-8">
         {searchQuery ? (
@@ -197,22 +207,22 @@ const ShopPage = () => {
           :
           (
             <>
-            {products.msg?.length === 0 ? (
-            <h1 className="p-5 text-4xl text-center mx-auto">
-              Products not found
-            </h1>
-            ) : (
-            <div className="mt-12 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 h-full">
-              {products?.msg?.map((item) => (
-                <ProductList key={item._id} product={item} />
-              ))}
-            </div>
-            )}
+              { products.msg != 'error' ?
+
+                (<div className="mt-12 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 h-full">
+                  {products?.msg?.map((item) => (
+                    <ProductList key={item._id} product={item} />
+                  ))}
+                </div>) :
+                (
+                  <h1 className="text-center font-medium">Products not found</h1>
+                )
+              }
             </>
           )
         }
         <Pagination
-          page={products.totalPage}
+          page={products?.totalPage}
           currentPage={queryParamValue}
           handleQueries = {handleQueries}
         />

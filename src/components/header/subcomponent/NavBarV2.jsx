@@ -30,7 +30,7 @@ const navRent = [
 const defaultLink = [  
   { name: "Rent", items: navRent, current: false },
   { name: "Collection", items:navCollection, current: false },
-  { name: "Services", href: "/services", current: false },
+  { name: "FAQ", href: "/faq", current: false },
 ];
 
 export default function NavBarV2() {

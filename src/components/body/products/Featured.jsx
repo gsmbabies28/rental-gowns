@@ -3,19 +3,21 @@ import NewArrivalProduct from "./NewArrivalProduct"
 import VideoProducts from "./VideoProducts"
 import Testimonials from "./Testimonials"
 import axios from 'axios'
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 const Featured = () => {
-
-  const[productsFeatured, setProductsFeatured] = useState(null)
+  const[productsFeatured, setProductsFeatured] = useState([])
+  const [loading, setLoading] = useState(true);
 
   useEffect( () => {
     //get featured products
     axios.get(`${import.meta.env.VITE_APP_API_URL}/products/featured/all`)
     .then(res=>{
-      setProductsFeatured(res.data.msg)
+      setProductsFeatured(res.data.msg);
+      setLoading(false);
     })
-    .catch(err=>console.error(err))
+    .catch(err=>console.error(err));
+    return ()=>{setLoading(true);}
   },[])
   
   return (
@@ -29,7 +31,7 @@ const Featured = () => {
                 Functional handbags made of luxurious materials to improve people's lives in small but mighty ways.
             </p>
         </div>
-        <ProductFeatured products={productsFeatured}/>
+        <ProductFeatured loading={loading} products={productsFeatured}/>
         <NewArrivalProduct />
         <VideoProducts />
         <Testimonials />

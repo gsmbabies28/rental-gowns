@@ -32,8 +32,8 @@ const Banner = ({title, text, btnTxt}) => {
             </Link>
 
             <Link
-              to="#"
-              className="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-cyan-600 shadow hover:text-black focus:outline-none focus:ring active:text-rose-500 sm:w-auto"
+              to="/faq"
+              className="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-cyan-600 shadow hover:text-black focus:outline-none focus:ring active:text-cyan-500 sm:w-auto"
             >
               Learn More
             </Link>
