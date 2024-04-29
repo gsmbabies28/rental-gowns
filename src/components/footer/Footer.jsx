@@ -1,3 +1,5 @@
+import { IoLogoFacebook } from "react-icons/io5";
+import { LuInstagram } from "react-icons/lu";
 const Footer = () => {
   return (
     <footer className="bg-white dark:bg-gray-900 ">
@@ -5,49 +7,47 @@ const Footer = () => {
         <div className="grid grid-cols-3 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3 justify-items-center">
           <div>
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-              Quick links
+              Sunflower Rentals
             </h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
               <li className="mb-4">
-                <a href="#" className=" hover:underline">
-                  About
-                </a>
+                &copy; Sunflower Rentals.
               </li>
+              
               <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Careers
-                </a>
-              </li>
-              <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Brand Center
-                </a>
-              </li>
-              <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Blog
-                </a>
+                <ul className="flex gap-3 text-2xl">
+                  <li>
+                    <a href="https://www.facebook.com" target="_blank">
+                      <IoLogoFacebook />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagam.com" target="_blank">
+                      <LuInstagram />
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
           <div>
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-              Help center
+              Info
             </h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
               <li className="mb-4">
                 <a href="#" className="hover:underline">
-                  Discord Server
+                  Search
                 </a>
               </li>
               <li className="mb-4">
                 <a href="#" className="hover:underline">
-                  Twitter
+                  About Us
                 </a>
               </li>
               <li className="mb-4">
                 <a href="#" className="hover:underline">
-                  Facebook
+                  How it works
                 </a>
               </li>
               <li className="mb-4">
@@ -55,28 +55,40 @@ const Footer = () => {
                   Contact Us
                 </a>
               </li>
+              <li className="mb-4">
+                <a href="#" className="hover:underline">
+                  FAQs
+                </a>
+              </li>
+              <li className="mb-4">
+                <a href="#" className="hover:underline">
+                  Terms and Conitions
+                </a>
+              </li>
             </ul>
           </div>
           <div>
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-              Legal
+              Subscribe
             </h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
               <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Privacy Policy
-                </a>
+                  Sign up to our mailing list
               </li>
-              <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Licensing
-                </a>
+              <li className="mb-4 space-x-2">
+                <input
+                  type="email" 
+                  id="email" 
+                  name="email"
+                  className="form-input bg-slate-100"
+                />
+                <button
+                  className="border-2 px-4 py-2 bg-slate-600 text-white"
+                >
+                  OK
+                </button>
               </li>
-              <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Terms &amp; Conditions
-                </a>
-              </li>
+             
             </ul>
           </div>
         </div>

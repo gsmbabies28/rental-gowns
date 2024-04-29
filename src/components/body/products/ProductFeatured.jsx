@@ -1,8 +1,13 @@
+import LoadingProductSkeleton from "../../utils/LoadingProductSkeleton";
 import ProductList from "../../utils/ProductList";
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+
 const ProductFeatured = ({products,loading}) => {
-  
+  const loadingSkeleton = [];
+
+  for(let i=0; i<8; i++){
+    loadingSkeleton.push(<LoadingProductSkeleton/>);
+  }
+
   return (
     <div className="bg-white">
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -11,13 +16,7 @@ const ProductFeatured = ({products,loading}) => {
         {loading ? 
         (
           <>
-            <Skeleton className="h-full"/>
-            <Skeleton className="h-full"/>
-            <Skeleton className="h-full"/>
-            <Skeleton className="h-full"/>
-            <Skeleton className="h-full"/>
-            <Skeleton className="h-full"/>
-            <Skeleton className="h-full"/>
+            {loadingSkeleton.map( (loading) => loading )}
           </>
         ) :
         (

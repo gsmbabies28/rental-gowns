@@ -66,7 +66,7 @@ const ShopPage = () => {
         fetchProduct(queries,source);
         console.log("all endpoint"  );
       break;
-
+cd 
       case "/collections/gowns":
         setTitle("Gowns");
         console.log("gown endpoint");
@@ -119,9 +119,20 @@ const ShopPage = () => {
         case "/collections/cocktail":
           setTitle("Cocktail");
           console.log("cocktail endpoint");
-          queries = '?category_eventType=cocktail'
+          queries = '?category_eventType=cocktail';
           fetchProduct(queries,source);
         break;
+
+        case "/collections/kids":
+          setTitle("Kids section");
+          console.log("kid sections endpoint");
+          queries = '?category_ageGroup=kids';
+          fetchProduct(queries,source);
+        break;
+
+        default:
+          setTitle("No product found!");
+          fetchProduct("","");
     }
 
     // Cleanup function

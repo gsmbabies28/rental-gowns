@@ -19,7 +19,7 @@ import NavBarV2 from "./components/header/subcomponent/NavBarV2";
 import ShopPage from "./pages/ShopPage";
 import CartPage from "./pages/CartPage";
 import ProductDetails from "./pages/ProductDetails";
-
+import FAQPage from "./pages/FAQPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +35,7 @@ const router = createBrowserRouter(
           <Route path="top" element={<ShopPage />} />
           <Route path="bottom" element={<ShopPage />} />
           <Route path="set" element={<ShopPage />} />
+          <Route path="kids" element={<ShopPage />} />
         </Route>
         <Route path="account">
           <Route index path="login" element={<LoginPage />} />
@@ -47,7 +48,7 @@ const router = createBrowserRouter(
             }
           />
         </Route>
-        <Route path="faq" element={<h1>hello</h1>} />
+        <Route path="faq" element={<FAQPage />} />
         <Route path="cart" element={<CartPage />} />
         <Route path="products/:name" element={<ProductDetails />} />
         <Route
