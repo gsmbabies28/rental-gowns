@@ -1,48 +1,50 @@
 import colors from "./colors";
-import ShopPageContext from "../../UseContext/ShopPageContext";
-import { useContext } from "react";
 import  SideTabListInput from "./SideTabListInput";
 import { SideTabInput } from "./SideTabListInput";
+import ShopPageContext from "../../UseContext/ShopPageContext";
+import { useContext } from "react";
 
 const SideTabFilter = () => {
-    const { handleQueries } = useContext(ShopPageContext);
-  return (
-    <>
-      <ul className="space-y-4 text-xl">
-        <SideTabListInput headerTitle={'Browse Collection'} > 
-            <SideTabInput 
-              label={'Wedding'}
-              name={'collections'}
-              value={'wedding'}
-              type={'radio'}
-            />
-            <SideTabInput 
-              label={'Casual'}
-              name={'collections'}
-              value={'casual'}
-              type={'radio'}
-            />
-            <SideTabInput 
-              label={'Cocktail'}
-              name={'collections'}
-              value={'cocktail'}
-              type={'radio'}
-            />
-            <SideTabInput 
-              label={'Tuxedos'}
-              name={'collections'}
-              value={'tuxedos'}
-              type={'radio'}
-            />
-            <SideTabInput 
-              label={'Gowns'}
-              name={'collections'}
-              value={'gowns'}
-              type={'radio'}
-            />
-        </SideTabListInput>
+  const {location} = useContext(ShopPageContext);
+  let inputToShow;
 
-        <SideTabListInput headerTitle={'Product Type'} > 
+  switch(location.pathname) {
+    case "/collections/bottoms":
+      inputToShow = (
+        <SideTabInput 
+            label={'Bottom'}
+            name={'category_type'}
+            type={'checkbox'}
+            value={'bottom'}
+        />
+      );
+      break;
+    
+    case "/collections/tops":
+      inputToShow = (
+        <SideTabInput 
+            label={'Top'}
+            name={'category_type'}
+            type={'checkbox'}
+            value={'top'}
+        />
+      );
+      break;
+    
+    case "/collections/sets":
+      inputToShow = (
+        <SideTabInput 
+            label={'Set'}
+            name={'category_type'}
+            type={'checkbox'}
+            value={'set'}
+        />
+      );
+      break;
+
+    case "/collections/all":
+      inputToShow = (
+        <>
           <SideTabInput 
             label={'Bottom'}
             name={'category_type'}
@@ -67,6 +69,47 @@ const SideTabFilter = () => {
             type={'checkbox'}
             value={'dress'}
           />
+        </>
+      );
+  }
+  return (
+    <>
+      <ul className="space-y-4 text-xl">
+        <SideTabListInput headerTitle={'Browse Collection'} > 
+            <SideTabInput 
+              label={'Wedding'}
+              name={'collections'}
+              value={'weddings'}
+              type={'radio'}
+            />
+            <SideTabInput 
+              label={'Casual'}
+              name={'collections'}
+              value={'casuals'}
+              type={'radio'}
+            />
+            <SideTabInput 
+              label={'Cocktail'}
+              name={'collections'}
+              value={'cocktails'}
+              type={'radio'}
+            />
+            <SideTabInput 
+              label={'Tuxedos'}
+              name={'collections'}
+              value={'tuxedos'}
+              type={'radio'}
+            />
+            <SideTabInput 
+              label={'Gowns'}
+              name={'collections'}
+              value={'gowns'}
+              type={'radio'}
+            />
+        </SideTabListInput>
+
+        <SideTabListInput headerTitle={'Product Type'} > 
+          {inputToShow}
         </SideTabListInput>
 
         <SideTabListInput headerTitle={'Availability'} > 

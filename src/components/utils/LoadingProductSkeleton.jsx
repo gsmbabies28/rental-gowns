@@ -5,7 +5,7 @@ const LoadingProductSkeleton = () => {
 
   return (
     <>
-        <Skeleton  height={200} />
+      <Skeleton  height={200} />
     </>
   )
 }

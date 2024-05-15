@@ -2,9 +2,11 @@ import { IoLogoFacebook } from "react-icons/io5";
 import { LuInstagram } from "react-icons/lu";
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-gray-900 ">
+    <footer>
       <div className="mx-auto w-full max-w-screen-2xl">
-        <div className="grid grid-cols-3 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3 justify-items-center">
+
+        <div className="grid grid-cols-1 gap-8 py-6 lg:py-8 md:grid-cols-3 justify-items-center text-center md:text-left">
+         
           <div>
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
               Sunflower Rentals
@@ -15,7 +17,7 @@ const Footer = () => {
               </li>
               
               <li className="mb-4">
-                <ul className="flex gap-3 text-2xl">
+                <ul className="flex gap-3 text-2xl justify-center md:justify-start">
                   <li>
                     <a href="https://www.facebook.com" target="_blank">
                       <IoLogoFacebook />
@@ -30,6 +32,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+         
           <div>
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
               Info
@@ -67,6 +70,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+
           <div>
             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
               Subscribe
@@ -91,9 +95,11 @@ const Footer = () => {
              
             </ul>
           </div>
+
         </div>
+
         <div className="px-4 py-6 bg-gray-100 dark:bg-gray-700 md:flex md:items-center md:justify-between">
-          <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
+          <span className="text-sm text-gray-500 dark:text-gray-300">
             © 2024<a href="https://flowbite.com/"> Sunflower</a>. All Rights
             Reserved.
           </span>
@@ -191,6 +197,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
+
       </div>
     </footer>
   );

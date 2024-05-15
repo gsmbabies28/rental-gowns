@@ -16,7 +16,11 @@ const ProductFeatured = ({products,loading}) => {
         {loading ? 
         (
           <>
-            {loadingSkeleton.map( (loading) => loading )}
+            {loadingSkeleton.map( (loading,index) => (
+              <div key={index}>
+                {loading}
+              </div>
+            ))}
           </>
         ) :
         (

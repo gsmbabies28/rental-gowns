@@ -14,22 +14,22 @@ import { useNavigate } from "react-router-dom";
 const navCollection = [
   { name: "Gowns", href: "/collections/gowns", current: false },
   { name: "Tuxedos", href: "/collections/tuxedos", current: false },
-  { name: "Cocktail", href: "/collections/cocktail", current: false },
-  { name: "Wedding", href: "/collections/wedding", current: false },
-  { name: "Casual", href: "/collections/casual", current: false },
+  { name: "Cocktail", href: "/collections/cocktails", current: false },
+  { name: "Wedding", href: "/collections/weddings", current: false },
+  { name: "Casual", href: "/collections/casuals", current: false },
 ];
 
 const navRent = [
   { name: "All", href: "/collections/all", current: false },
-  { name: "Top", href: "/collections/top", current: false },
-  { name: "Bottom", href: "/collections/bottom", current: false },
-  { name: "Set", href: "/collections/set", current: false },
-
+  { name: "Tops", href: "/collections/tops", current: false },
+  { name: "Bottoms", href: "/collections/bottoms", current: false },
+  { name: "Sets", href: "/collections/sets", current: false },
+  { name: "Dresses", href: "/collections/dresses", current: false },
 ];
 
-const defaultLink = [  
+const defaultLink = [
   { name: "Rent", items: navRent, current: false },
-  { name: "Collection", items:navCollection, current: false },
+  { name: "Collection", items: navCollection, current: false },
   { name: "FAQ", href: "/faq", current: false },
 ];
 
@@ -40,14 +40,14 @@ export default function NavBarV2() {
 
   const handleShowSearch = () => {
     setShowSearch(true);
-    var body = document.getElementsByTagName('body')[0];
-    body.style.overflowY = 'hidden';
+    var body = document.getElementsByTagName("body")[0];
+    body.style.overflowY = "hidden";
   };
 
   const handleCloseSearch = () => {
     setShowSearch(false);
-    var body = document.getElementsByTagName('body')[0];
-    body.style.overflowY = ''
+    var body = document.getElementsByTagName("body")[0];
+    body.style.overflowY = "";
   };
 
   const handleNavLinkToggle = (links) => {
@@ -57,11 +57,11 @@ export default function NavBarV2() {
   };
 
   const onSearch = (e) => {
-    setShowSearch(false)
-    var body = document.getElementsByTagName('body')[0];
-    body.style.overflowY = ''
-    navigate(`/collections/all?search=${e}`)
-  }
+    setShowSearch(false);
+    var body = document.getElementsByTagName("body")[0];
+    body.style.overflowY = "";
+    navigate(`/collections/all?search=${e}`);
+  };
 
   return (
     <>
@@ -69,17 +69,20 @@ export default function NavBarV2() {
         {({ open }) => (
           <>
             {/* searchbar */}
-            { showSearch &&
-              (<div id="myModal" className='modal pt-7 h-full overflow-hidden'>
+            {showSearch && (
+              <div id="myModal" className="modal pt-7 h-full overflow-hidden">
                 <div className="m-auto w-auto bg-white flex justify-center px-3">
-                  <SearchBar handleSearch={onSearch}/>
+                  <SearchBar handleSearch={onSearch} />
                   <button onClick={handleCloseSearch}>
                     <IoMdClose className="text-3xl cursor-pointer" />
                   </button>
                 </div>
-                <div className="h-full w-full" onClick={handleCloseSearch}></div>
-              </div>)
-            }
+                <div
+                  className="h-full w-full"
+                  onClick={handleCloseSearch}
+                ></div>
+              </div>
+            )}
             {/* end of search bar */}
 
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -109,33 +112,28 @@ export default function NavBarV2() {
                   <div className="hidden sm:ml-6 sm:block">
                     <ul className="flex space-x-4">
                       {defaultLink.map((link) => {
-                        if(link.hasOwnProperty('items')) {
+                        if (link.hasOwnProperty("items")) {
                           return (
-                          <li
-                            key={link.name}
-                            className="hover:bg-cyan-500 rounded-md text-sm font-medium"
-                          >
-                            <MenuDropDown link={link} />
-                          </li>
-                          )
+                            <li
+                              key={link.name}
+                              className="hover:bg-cyan-500 rounded-md text-sm font-medium"
+                            >
+                              <MenuDropDown link={link} />
+                            </li>
+                          );
                         } else {
                           return (
                             <li
-                              key = {link.name}
+                              key={link.name}
                               className="text-black hover:bg-cyan-500 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                             >
-                              <NavLink 
-                                to={link.href}
-                                state = {link.name}
-                              >
+                              <NavLink to={link.href} state={link.name}>
                                 {link.name}
                               </NavLink>
                             </li>
-                          )
+                          );
                         }
-                      }
-                      )}
-                 
+                      })}
                     </ul>
                   </div>
                 </div>
@@ -159,7 +157,7 @@ export default function NavBarV2() {
             <Disclosure.Panel className="sm:hidden w-auto relative border-t-2 h-auto">
               <div className="inline w-full space-y-1 px-2 pb-3 pt-2 z-0 ">
                 {defaultLink?.map((link) => {
-                  <hr />
+                  <hr />;
                   if (link.hasOwnProperty("items")) {
                     return (
                       <NavLink
@@ -167,12 +165,10 @@ export default function NavBarV2() {
                         onClick={() => handleNavLinkToggle(link?.items)}
                         className="w-full"
                         key={link.name}
-                        state = {link.name}
+                        state={link.name}
                       >
-                        <li
-                          className="text-gray-400 hover:bg-cyan-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-                        >
-                            <span>{link.name}</span>
+                        <li className="text-gray-400 hover:bg-cyan-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">
+                          <span>{link.name}</span>
                         </li>
                       </NavLink>
                     );
@@ -182,10 +178,9 @@ export default function NavBarV2() {
                         key={link.name}
                         className="text-gray-400 hover:bg-cyan-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                       >
-                        <NavLink 
-                          to={link.href}
-                          state = {link.name}
-                        >{link.name}</NavLink>
+                        <NavLink to={link.href} state={link.name}>
+                          {link.name}
+                        </NavLink>
                       </li>
                     );
                   }
@@ -215,7 +210,7 @@ export default function NavBarV2() {
                   </div>
 
                   {isShow?.link?.map((link) => (
-                    <Link 
+                    <Link
                       key={link.name}
                       to={link.href}
                       className="text-gray-400 hover:bg-cyan-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
