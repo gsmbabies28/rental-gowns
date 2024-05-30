@@ -1,14 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import { Disclosure, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { CiSearch, CiUser } from "react-icons/ci";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
-import SearchBar from "./SearchBar";
+import SearchBar from "../../utils/SearchBar";
 import { IoMdClose } from "react-icons/io";
 import { useState } from "react";
 // import {defaultLink}  from "../../utils/NavItemsLink";
 import MenuDropDown from "../../utils/MenuDropDown";
-import { useNavigate } from "react-router-dom";
+
 
 //temp try kung mo gana inig deploy sa vercel
 const navCollection = [
@@ -36,7 +36,6 @@ const defaultLink = [
 export default function NavBarV2() {
   const [showSearch, setShowSearch] = useState(false);
   const [isShow, setIsShow] = useState({ state: false, link: [] });
-  const navigate = useNavigate();
 
   const handleShowSearch = () => {
     setShowSearch(true);
@@ -56,13 +55,6 @@ export default function NavBarV2() {
     setIsShow({ ...isShow });
   };
 
-  const onSearch = (e) => {
-    setShowSearch(false);
-    var body = document.getElementsByTagName("body")[0];
-    body.style.overflowY = "";
-    navigate(`/collections/all?search=${e}`);
-  };
-
   return (
     <>
       <Disclosure as="nav" className="bg-white h-auto">
@@ -72,7 +64,7 @@ export default function NavBarV2() {
             {showSearch && (
               <div id="myModal" className="modal pt-7 h-full overflow-hidden">
                 <div className="m-auto w-auto bg-white flex justify-center px-3">
-                  <SearchBar handleSearch={onSearch} />
+                  <SearchBar setShowSearch={setShowSearch}/>
                   <button onClick={handleCloseSearch}>
                     <IoMdClose className="text-3xl cursor-pointer" />
                   </button>

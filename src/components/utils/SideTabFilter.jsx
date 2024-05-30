@@ -72,6 +72,7 @@ const SideTabFilter = () => {
         </>
       );
   }
+  
   return (
     <>
       <ul className="space-y-4 text-xl">
@@ -81,30 +82,35 @@ const SideTabFilter = () => {
               name={'collections'}
               value={'weddings'}
               type={'radio'}
+              typeQueries={'radio'}
             />
             <SideTabInput 
               label={'Casual'}
               name={'collections'}
               value={'casuals'}
               type={'radio'}
+              typeQueries={'radio'}
             />
             <SideTabInput 
               label={'Cocktail'}
               name={'collections'}
               value={'cocktails'}
               type={'radio'}
+              typeQueries={'radio'}
             />
             <SideTabInput 
               label={'Tuxedos'}
               name={'collections'}
               value={'tuxedos'}
               type={'radio'}
+              typeQueries={'radio'}
             />
             <SideTabInput 
               label={'Gowns'}
               name={'collections'}
               value={'gowns'}
               type={'radio'}
+              typeQueries={'radio'}
             />
         </SideTabListInput>
 

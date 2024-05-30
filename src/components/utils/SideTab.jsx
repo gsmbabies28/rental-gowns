@@ -3,6 +3,7 @@ import SideTabFilter from "./SideTabFilter";
 import { IoMdClose } from "react-icons/io";
 import ShopPageContext from "../../UseContext/ShopPageContext";
 import { useContext } from "react";
+import SideTabSort from "./SideTabSort";
 
 const SideTab = () => {
     const {showSideTab, toggleShowTab, products, setSearch } = useContext(ShopPageContext);
@@ -11,8 +12,7 @@ const SideTab = () => {
             <div className='w-4/5 sm:w-3/5 md:w-2/5 bg-white h-full max-h-full overflow-auto fixed right-0 text-center py-3'>
                 
                 <div className="relative px-2">
-                    {showSideTab.filter && (<h1>Filter</h1>)}
-                    {showSideTab.sort && (<h1>Sort</h1>)}
+                    <h1>Filter & Sort</h1>
                     <p>{products?.msg?.length} products</p>
                     <button type="button" onClick={toggleShowTab}>
                     <IoMdClose className="absolute right-3 top-2  text-3xl cursor-pointer" />
@@ -21,7 +21,8 @@ const SideTab = () => {
                 </div>
 
                 <div className="mt-3 w-3/5 mx-auto">
-                    <SideTabFilter />
+                    {showSideTab.filter && <SideTabFilter />}
+                    {showSideTab.sort && <SideTabSort />}
                 </div>
                 
                 <div className="flex items-baseline justify-evenly">

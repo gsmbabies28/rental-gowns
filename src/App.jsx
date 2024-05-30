@@ -21,6 +21,7 @@ import CartPage from "./pages/CartPage";
 import ProductDetails from "./pages/ProductDetails";
 import FAQPage from "./pages/FAQPage";
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -68,13 +69,12 @@ export default function App() {
   );
 }
 
-
 //Layout Component 
 function Layout() {
   return (
     <>
       <Header>
-        <AnnouncementBar text="Discounted Price!!!!" bgColor="black" />
+        <AnnouncementBar text="Discounted Price!!!!"/>
         <NavBarV2 />
       </Header>
       <main>

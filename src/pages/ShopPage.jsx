@@ -5,7 +5,7 @@ import SideTab from "../components/utils/SideTab";
 import { useLocation, useSearchParams } from "react-router-dom";
 import Filter from "../components/utils/Filter";
 import axios from "axios";
-import SearchBar from "../components/header/subcomponent/SearchBar";
+import SearchBar from "../components/utils/SearchBar";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ShopPageContextProvider } from "../UseContext/ShopPageContext";
 import { useNavigate } from "react-router-dom";
@@ -182,7 +182,6 @@ const ShopPage = () => {
         }
         break;
     }
-
     setSearch(search);
   };
 
@@ -203,7 +202,7 @@ const ShopPage = () => {
   return (
     <div className="mx-auto my-5 px-2 md:px-8">
       {searchQuery ? (
-        <SearchBar handleSearch={handleQueries} />
+        <SearchBar />
       ) : (
         <h1 className="text-4xl py-2 w-full max-w-24">{ title || <Skeleton/> }</h1>
       )}

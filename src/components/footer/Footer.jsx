@@ -82,7 +82,7 @@ const Footer = () => {
               <li className="mb-4 space-x-2">
                 <input
                   type="email" 
-                  id="email" 
+                  id="emailSubscribe" 
                   name="email"
                   className="form-input bg-slate-100"
                 />

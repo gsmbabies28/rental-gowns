@@ -28,7 +28,7 @@ const Filter = ({handleShowTab}) => {
           id="sort"
           name="sort" 
           type="button" 
-          onClick={(e)=>handleShowTab('sort')}
+          onClick={()=>handleShowTab('sort')}
         >
           <span 
             className="hover:underline underline-offset-4 tracking-wider"
@@ -37,36 +37,6 @@ const Filter = ({handleShowTab}) => {
           </span>
         </button>
       </div>
-
-        {/* <div className="space-x-5 hidden md:block">
-          <span className="tracking-wider">Filter:</span>
-          <span>
-            <select id="availability" className="px-3">
-              <option>All products</option>
-              <option>Rented</option>
-            </select>
-          </span>
-          <select id="color" className="px-3">
-            <option>Color</option>
-            <option>blue</option>
-          </select>
-        </div>
-
-        <div className="flex space-x-20">
-          <div className="space-x-5 hidden md:block">
-            <span className="space-x-2">
-              <span>Sort by:</span>
-              <select className="px-3">
-                <option value="asc">A-Z</option>
-                <option value="desc">Z-A</option>
-              </select>
-            </span>
-          </div>
-          <div>
-            <h1 className="tracking-widest">{numOfProducts} products</h1>
-          </div>
-        </div> */}
-
     </div>
   );
 };

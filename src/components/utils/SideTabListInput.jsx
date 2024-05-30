@@ -7,12 +7,14 @@ const SideTabListInput = ({ children, headerTitle }) => {
       <span className="font-medium tracking-wide text-center">
         {headerTitle}
       </span>
-      <ul className="space-y-1">{children}</ul>
+      <ul className="space-y-1">
+        {children}
+      </ul>
     </li>
   );
 };
 
-export const SideTabInput = ({ name, type, label, value, placeHolder }) => {
+export const SideTabInput = ({ name, type, label, value, placeHolder, typeQueries }) => {
   const { search, handleQueries, handleNavigate, location } =
     useContext(ShopPageContext);
   const lastEndPoint = location.pathname.split("/").pop();
@@ -33,11 +35,13 @@ export const SideTabInput = ({ name, type, label, value, placeHolder }) => {
       break;
     case "radio":
       styles = "form-radio";
-      if (lastEndPoint == value) isChecked = true;
+      if (lastEndPoint == value || search.get(name) === value) 
+        isChecked = true;
       break;
     case "number":
       styles = "form-input text-black";
       break;
+      
     default:
       console.warning("only checkbox, radio, and number are accepted");
   }
@@ -54,22 +58,29 @@ export const SideTabInput = ({ name, type, label, value, placeHolder }) => {
             className={`${styles} text-cyan-500`}
             value={value}
             onChange={(e) => {
-              switch (type) {
+
+              switch (typeQueries) {
+
                 case "radio":
                   handleNavigate(`collections/${e.target.value}`);
                   break;
 
-                case "checkbox":
+                case "toggle" :
+                  handleQueries(
+                    e.target.name,
+                    e.target.value,
+                  );
+                  break;
+
+                default:
                   handleQueries(
                     e.target.name,
                     e.target.value,
                     e.target.checked
                   );
                   break;
-
-                default:
-                  console.error("no function found in onchange");
               }
+
             }}
             checked={isChecked}
           />
