@@ -1,27 +1,33 @@
 import axios from "axios";
 
 export const getUserDetails = async (tokenBearer, source) => {
-    if(!tokenBearer)
-        return;
-    let data;
+  
+  let data = new Object();
 
-    try {
+  if (!tokenBearer) return;
+
+  try {
     const response = await axios.get(
       `${import.meta.env.VITE_APP_API_URL}/users/getUserDetails`,
       {
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${tokenBearer}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tokenBearer}`,
         },
-        cancelToken: source.token
-      },
-      
+        cancelToken: source.token,
+      }
     );
-    
+
     data = await response.data.msg;
-    
+    return { ...data, isLogged: true };
+
   } catch (error) {
-    console.log(error);
+    
+    if (error.response?.data?.error.message === "jwt expired") {
+      localStorage.removeItem("token");
+      return { isLogged: false };
+    }
+
+    console.log(error.response);
   }
-  return {...data,isLogged:true};
 };

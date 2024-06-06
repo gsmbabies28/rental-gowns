@@ -1,5 +1,31 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "../../UseContext/UserContext";
+
 const LoggedPage = () => {
+    const {user:{firstName, lastName}} = useContext(UserContext);
+    const fullName = `${firstName} ${lastName}`;
+
+    // Check if Geolocation is supported
+    if (navigator.geolocation) {
+        // Get the current position
+        navigator.geolocation.getCurrentPosition(
+        // Success callback
+        (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+        },
+        // Error callback
+        (error) => {
+            console.error(`Error Code = ${error.code} - ${error.message}`);
+        }
+        );
+    } else {
+        console.error("Geolocation is not supported by this browser.");
+    }
+  
+
   return (
     <div className="mx-auto text-left mt-12 w-full max-w-screen-lg px-8 md:px-8">
         <div className="">
@@ -15,7 +41,7 @@ const LoggedPage = () => {
             </div>
             <div>
                 <h1 className="mt-12 text-2xl">Account details</h1>
-                <p>Giovanni Francisco</p>
+                <p>{ fullName }</p>
                 <p>Philipines</p>
             </div>
         </div>

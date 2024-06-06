@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-export const handleLogin = async (e,navigate,userLogin,password) => {
-    
+
+export const handleLogin = async (e,navigate,userLogin,password, setToken) => {    
     e.preventDefault();
     console.log(userLogin+" "+password);
 
@@ -17,9 +17,19 @@ export const handleLogin = async (e,navigate,userLogin,password) => {
         )
         const { token } = response.data;
         
-        localStorage.setItem('token', token);
+        const success = await Swal.fire({
+            title: "Login sucess!",
+            text: "Welcome User",
+            icon: "success"
+        });
+        
+        if(success.isConfirmed || success.dismiss){
+            localStorage.setItem('token', token);
+            await setToken(token);
+            navigate('/');
+        }
 
-        // navigate('/');
+
     } catch (error) {
         if(error.response.status == 404 || 401)
             Swal.fire({

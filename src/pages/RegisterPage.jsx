@@ -1,9 +1,8 @@
-import axios from "axios";
 import Button from "../components/utils/Button";
 import { useReducer,useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import {handleSubmitForm} from '../functionsAndHandlers/Registration';
 import {
   initialState,
   RegistrationReducer,
@@ -19,42 +18,12 @@ const RegisterPage = () => {
     dispatch({ type: "update", propName: prop, propValue: value });
   };
 
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
-
-    if(!isPasswordMatch)
-      return;
-
-    try {  
-      const response = await axios.post(
-        `${import.meta.env.VITE_APP_API_URL}/users/register`,
-        state
-      );
-      const ifOk = await Swal.fire({
-        title: "Success!",
-        text: "Registration Success!",
-        icon: "success"
-      })  
-
-      if(ifOk.isConfirmed)
-        navigate("/account/login");
-
-    } catch (error) {
-      const checkEmail = error.response.data.error;
-      for(let check of checkEmail){
-        if(check.path==="email"){
-          return setIsEmailInUse(true);
-        }
-      }
-    } 
-  };
-
   
   return (
     <div id="registration-page" className="mx-auto text-center w-full">
       <form
         className="mx-auto my-12 space-y-4 max-w-96 p-3 md:p-1"
-        onSubmit={(e) => handleSubmitForm(e)}
+        onSubmit={(e) => handleSubmitForm(e,isPasswordMatch,navigate,setIsEmailInUse,state)}
       >
         <h1 className="text-5xl">Create account</h1>
 

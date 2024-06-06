@@ -2,17 +2,19 @@ import Button from "./Button";
 import {Link} from "react-router-dom"
 import { handleLogin } from "../../functionsAndHandlers/Login";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import UserContext from "../../UseContext/UserContext";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const [ userLogin, setUserLogin ] = useState('');
   const [ password, setPassword ] = useState('');
+  const { setToken } = useContext(UserContext);
 
   return (
       <form 
         className="mx-auto my-12 space-y-4 w-full max-w-96"
-        onSubmit={e=>handleLogin(e,navigate, userLogin, password)}
+        onSubmit={e=>handleLogin(e,navigate, userLogin, password,setToken)}
       >
         <h1 className="text-5xl">Login</h1>
         <div className="mt-2 space-y-2">
@@ -41,13 +43,13 @@ const LoginForm = () => {
             required
           />
         </div>
-        <Link to="../recover" className="block text-left underline underline-offset-4">Forgot password?</Link>
+        <Link to="/account/recover" className="block text-left underline underline-offset-4">Forgot password?</Link>
         <Button 
           margin="5" 
           type="submit" 
           text="Login"
         />
-        <Link to="../register" className="block underline underline-offset-2">Create account</Link>
+        <Link to="/account/register"  className="block underline underline-offset-2">Create account</Link>
       </form>
       
   )
