@@ -9,6 +9,7 @@ import ShopPage from "./pages/ShopPage";
 import CartPage from "./pages/CartPage";
 import ProductDetails from "./pages/ProductDetails";
 import FAQPage from "./pages/FAQPage";
+import Logout from "./pages/Logout";
 
 import {
     createBrowserRouter,
@@ -40,6 +41,7 @@ export const router = createBrowserRouter(
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="recover" element={<ResetPassword />} />
+          <Route path="logout" element={<Logout />} />
           <Route
             path="*"
             element={

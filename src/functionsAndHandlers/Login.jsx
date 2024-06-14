@@ -3,8 +3,7 @@ import Swal from "sweetalert2";
 
 export const handleLogin = async (e,navigate,userLogin,password, setToken) => {    
     e.preventDefault();
-    console.log(userLogin+" "+password);
-
+    
     const data = {
         email: userLogin,
         password: password
@@ -22,21 +21,30 @@ export const handleLogin = async (e,navigate,userLogin,password, setToken) => {
             text: "Welcome User",
             icon: "success"
         });
-        
+
+        localStorage.setItem('token', token);
+        setToken(token);
+
         if(success.isConfirmed || success.dismiss){
-            localStorage.setItem('token', token);
-            await setToken(token);
+            
             navigate('/');
         }
 
 
     } catch (error) {
-        if(error.response.status == 404 || 401)
+        if (error.response && (error.response.status === 404 || error.response.status === 401)) {
             Swal.fire({
                 title: "Invalid credentials!",
                 text: "Please login again!",
                 icon: "error"
             });
+        } else {
+            Swal.fire({
+                title: "Error",
+                text: "Something went wrong. Please try again!",
+                icon: "error"
+            });
+        }
         console.log(error.response);
     }
 }   
