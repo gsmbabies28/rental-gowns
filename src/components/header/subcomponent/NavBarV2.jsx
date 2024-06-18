@@ -135,7 +135,7 @@ export default function NavBarV2() {
                     <CiSearch className="cursor-pointer text-xl hover:text-2xl active:text-slate-400" />
                   </button>
 
-                  <NavLink to="/account/login">
+                  <NavLink to="/account">
                     <CiUser className="cursor-pointer text-xl hover:text-2xl active:text-slate-400" />
                   </NavLink>
 

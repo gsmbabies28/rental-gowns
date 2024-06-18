@@ -1,5 +1,5 @@
-import LoadingProductSkeleton from "../../utils/LoadingProductSkeleton";
-import ProductList from "../../utils/ProductList";
+import LoadingProductSkeleton from "./LoadingProductSkeleton";
+import ProductList from "./ProductList";
 
 const ProductFeatured = ({products,loading}) => {
   const loadingSkeleton = [];
@@ -25,7 +25,7 @@ const ProductFeatured = ({products,loading}) => {
         ) :
         (
           <>
-            {products.map((product) => 
+            {products?.map((product) => 
             <ProductList key={product._id} product={product} />
             )}
           </>

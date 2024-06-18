@@ -1,4 +1,4 @@
-import ProductFeatured from "./ProductFeatured"
+import ProductFeatured from "../../utils/ProductFeatured"
 import NewArrivalProduct from "./NewArrivalProduct"
 import VideoProducts from "./VideoProducts"
 import Testimonials from "./Testimonials"

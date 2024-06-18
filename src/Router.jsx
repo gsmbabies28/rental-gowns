@@ -38,7 +38,6 @@ export const router = createBrowserRouter(
   
         <Route path="account">
           <Route index element={<LoginPage />} />
-          <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="recover" element={<ResetPassword />} />
           <Route path="logout" element={<Logout />} />

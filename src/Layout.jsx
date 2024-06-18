@@ -12,33 +12,43 @@ export default function Layout() {
     const [ user, setUser ] = useState(defaultUser);
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [isLoading , setIsLoading] = useState(true);
-  
+    const [isLogged, setIsLogged] = useState(false);
+
     useEffect(() => {    
       let source = axios.CancelToken.source();
-    
-      getUserDetails(token,source)
+
+      if(!token){
+        setIsLoading(false);
+        return;
+      }
+
+      getUserDetails(source,token,setToken)
       .then(
         res => {
           setUser(prev=>{
             return {...prev,...res}
           });
           setIsLoading(false);
+          setIsLogged(true);
         }
       )
-      .catch(error=>console.log(error));
+      .catch(error=>{
+        console.log(error)
+      });
   
       return () => {
+        setIsLogged(false);
         setIsLoading(true);
         source.cancel();
       }
   
     }, [token] );
 
-    console.log(user);
+    // console.log(user);
 
     return (
       <>
-        <UserContextProvider value={{user, isLoading,setToken}}>
+        <UserContextProvider value={{user, isLoading,setToken,isLogged}}>
           <Header>
             <AnnouncementBar text="Discounted Price!!!!" />
             <NavBarV2 />
