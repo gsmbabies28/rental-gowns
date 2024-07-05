@@ -7,26 +7,27 @@ export const handleSubmitForm = async (e,isPasswordMatch,navigate, setIsEmailInU
       return;
 
     try {  
-      await axios.post(
+      const res = await axios.post(
         `${import.meta.env.VITE_APP_API_URL}/users/register`,
         state
       );
-
+      
       const ifOk = await Swal.fire({
         title: "Success!",
-        text: "Registration Success!",
+        text: "Regi stration Success!",
         icon: "success"
       })  
 
       if(ifOk.isConfirmed || ifOk.isDismissed)
-        navigate("/account/login");
+        navigate("/account");
 
     } catch (error) {
-      const checkEmail = await error.response.data.error;
+      const checkEmail = await error?.response?.data?.error;
       for(let check of checkEmail){
-        if(check.path==="email"){
+        if(check.msg==="Email already in use"){
           return setIsEmailInUse(true);
         }
       }
+      console.error(error);
     } 
   };

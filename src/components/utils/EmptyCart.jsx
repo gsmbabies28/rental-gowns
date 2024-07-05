@@ -8,7 +8,7 @@ import UserContext from "../../UseContext/UserContext";
 function EmptyCart() {
   const[products, setProducts] = useState(null)
   const { isLogged } = useContext(UserContext);
-  console.log(isLogged);
+  
   useEffect( () => {
     //get featured products
     axios.get(`${import.meta.env.VITE_APP_API_URL}/products/alsoLikeProduct/all`)
@@ -23,7 +23,9 @@ function EmptyCart() {
         <Link to={'/collections/all'}>
           <Button text="Continue shopping" margin="10" />
         </Link>
+
         {!isLogged && <HaveAnAccount />}
+        
         <div className="w-full text-left mt-12">
             <h1 className="text-center px-12 sm:px-20 w-full text-2xl">You may also like</h1>
             <ProductFeatured products={products} />

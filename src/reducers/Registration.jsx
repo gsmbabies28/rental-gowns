@@ -14,7 +14,7 @@ export function RegistrationReducer(state,action) {
 
         default:
         return state;
+        
     }
-
 };
 

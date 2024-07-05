@@ -13,8 +13,8 @@ const ProductDetails = () => {
   },[]);
 
   const handleAddToCart = (id) => {
-    const currentTime = new Date().getTime();
-    const expirationTime = currentTime + 60 * 60 * 1000;
+    const currentTime = Date.now();
+    const expirationTime = currentTime + 1 * 60 * 1000;
 
     if(localStorage.length){
       let product = JSON.parse(localStorage.getItem('sunflower_cartItems'));

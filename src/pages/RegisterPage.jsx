@@ -12,6 +12,7 @@ const RegisterPage = () => {
   const [isEmailInUse, setIsEmailInUse] = useState(false);
   const navigate = useNavigate(); 
   const { isLogged } = useContext(UserContext);
+  
   const handleStateFormInput = (value, prop) => {
     dispatch({ type: "update", propName: prop, propValue: value });
   };
