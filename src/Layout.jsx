@@ -10,19 +10,15 @@ import axios from "axios";
 
 export default function Layout() {
     const [ user, setUser ] = useState(defaultUser);
-    const [token, setToken] = useState(localStorage.getItem('token'));
     const [isLoading , setIsLoading] = useState(true);
     const [isLogged, setIsLogged] = useState(false);
-
+    const [getToken, setToken] = useState(localStorage.getItem('token'));
+ 
     useEffect(() => {    
+      
       let source = axios.CancelToken.source();
 
-      if(!token){
-        setIsLoading(false);
-        return;
-      }
-
-      getUserDetails(source,token,setToken)
+      getUserDetails( setToken )
       .then(
         res => {
           setUser(prev=>{
@@ -33,22 +29,26 @@ export default function Layout() {
         }
       )
       .catch(error=>{
-        console.log(error)
-      });
+        // console.log(error);
+        setUser(defaultUser);
+        setIsLogged(false);
+        setIsLoading(false);
+        setIsLogged(false);
+      }); 
   
       return () => {
-        setIsLogged(false);
         setIsLoading(true);
+        setIsLogged(false);
         source.cancel();
       }
   
-    }, [token] );
+    }, [ getToken] );
 
     // console.log(user);
 
     return (
       <>
-        <UserContextProvider value={{user, isLoading,setToken,isLogged}}>
+        <UserContextProvider value={{user, isLoading,isLogged, getToken, setToken, setUser, setIsLogged}}>
           <Header>
             <AnnouncementBar text="Discounted Price!!!!" />
             <NavBarV2 />

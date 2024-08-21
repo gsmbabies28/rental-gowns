@@ -3,6 +3,7 @@ import UserContext from "../UseContext/UserContext";
 import { useContext, useEffect } from "react";
 
 const Logout = () => {
+  
   const { setToken } = useContext(UserContext);
   localStorage.clear(); 
 

@@ -1,32 +1,42 @@
 import axios from "axios";
 
-export const getUserDetails = async (source,token=null, setToken) => {
+export const getUserDetails = async ( setToken ) => {
   
   let data = new Object();
+  
+  const token = localStorage.getItem('token');
+
+  if(!token) 
+    throw new Error("Token is undefined");
+
 
   try {
+
     const response = await axios.get(
       `${import.meta.env.VITE_APP_API_URL}/users`,
       {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
-        },
-        cancelToken: source.token,
+        } 
       }
     );
     
     data = await response.data.msg;
+    return data;
 
   } catch (error) {
-    if (error.response?.data?.error.message === "jwt expired") {
+
+    // console.log(error.response.data)
+
+    if (error.response?.data?.msg === "Token expired") {
+      console.warn("expired na ue!!!")
       localStorage.removeItem("token");
-      setToken(null);
-      return;
     } else {
-      console.log(error.response);
-      console.log(error);
+      // console.error(error.response);
+      console.error(error);
     }
+
   }
-  return data;
+  
 };
