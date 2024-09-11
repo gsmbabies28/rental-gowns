@@ -11,19 +11,18 @@ import React, {
 import CartPageReducer, {
   fetchProductData,
   initialCartItems,
+  checkOut
 } from "../reducers/CartPage";
 import UserContext, {defaultUser} from "../UseContext/UserContext";
 
 const CartPage = () => {
   //Variables
   const [state, dispatch] = useReducer(CartPageReducer, initialCartItems());
-  const [expirationTime, setExpirationTime] = useState(
-    new Date(JSON.parse(localStorage.getItem("time")))
-  );
+  const expirationTime = new Date(JSON.parse(localStorage.getItem("time")));
   const [remainingTime, setRemainingTime] = useState(
     expirationTime - Date.now()
   );
-  const { isLogged, setIsLogged, setUser  } = useContext(UserContext);
+  const { isLogged, setIsLogged, setUser, user  } = useContext(UserContext);
 
   //Dispatch reducers
   const removeProduct = (id) => {
@@ -47,8 +46,8 @@ const CartPage = () => {
     fetchProductData(isLogged, state.token)
       .then((res) => dispatch({ type: "addProducts", products: res }))
       .catch((error) => {
-        console.log(error);
-        if(error.response.data.error.name === 'JsonWebTokenError' || error.response.data.error.name === 'TokenExpiredError'){
+        // console.log(error);
+        if(error.response?.status === 403 ){
           setUser(defaultUser);
           setIsLogged(false);
         }
@@ -128,8 +127,10 @@ const CartPage = () => {
               changeQuantity={changeQuantity}
             />
           ))}
-
-          <div className="mt-3 w-full  border-t-2 pt-5 space-y-5">
+          <div className="mt-3 w-full border-t-2 pt-2 space-y-5">
+            <div className="text-gray-600 text-left">
+              Shipping Address : {user.shipAdd}
+            </div>
             <div className="space-y-3">
               <label
                 htmlFor="note"
@@ -153,7 +154,10 @@ const CartPage = () => {
               <h3 className="tracking-widest text-sm mt-3">
                 Taxes and shipping calculated at checkout
               </h3>
-              <button className="bg-gray-700 text-sm font-medium tracking-widest text-slate-200 p-2 mt-3 w-full">
+              <button 
+                className="bg-gray-700 hover:bg-gray-900 text-sm font-medium tracking-widest text-slate-200 p-2 mt-3 w-full "
+                onClick = { () => checkOut(state.note) }
+              >
                 CHECKOUT
               </button>
             </div>

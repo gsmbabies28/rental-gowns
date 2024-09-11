@@ -28,6 +28,11 @@ export const addToCart = async ( token, fromLocalStorage, items ) => {
             }
         )     
     } catch (error) {
-        console.error("Something went wrong adding items to cart!");
+        // console.error("Something went wrong adding items to cart!");
+        // console.log(error); 
+        if(error.response?.status === 403){
+            localStorage.removeItem('token');
+            throw new Error('expired');
+        }
     }
 }

@@ -1,11 +1,9 @@
 import axios from "axios";
-
-
-
+import Swal from "sweetalert2";
 
 export const initialCartItems = () => {
   return {
-    cartItems: {},
+    cartItems: JSON.parse(localStorage.getItem('sunflower_cartItems')),
     productList: [],
     note: "",
     token: localStorage.getItem("token")
@@ -58,12 +56,13 @@ export const fetchProductData = async (isLogged,token) => {
   }
 };
 
-//Reducer fork cart page
+//Reducer for cart page
 const CartPageReducer = (state, action) => {
+
   switch (action.type) {
     case "addProducts":
       return { ...state, productList: action.products };
-
+    
     case "removeItem":
       if (action.isLogged) {
         // console.log(token);
@@ -71,7 +70,7 @@ const CartPageReducer = (state, action) => {
           {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${state.token}`,
           },
         })
         .then(res=>res)
@@ -150,12 +149,13 @@ const CartPageReducer = (state, action) => {
         },{
           headers: {
             'Content-Type' : "application/json",
-            Authorization : `Bearer ${token}`
+            Authorization : `Bearer ${state.token}`
           }
         })
-        .then(res => console.log("success change quantity") ) 
-        .catch(error => console.error("Error on changing quantity"));
+        .then(() => console.log("success change quantity") ) 
+        .catch(() => console.error("Error on changing quantity"));
       } else {
+        console.log(state.cartItems);
         localStorage.setItem(
           "sunflower_cartItems",
           JSON.stringify(state.cartItems)
@@ -165,14 +165,35 @@ const CartPageReducer = (state, action) => {
       return { ...state, productList: updatedItems };
     //end of change quantity  
 
-
     case "setNote":
       return { ...state, note: action.note };
-
+      
     default:
       console.log("Unknown action executed");
       break;
   }
 };
+
+//check out product
+export const checkOut = async () => {
+  Swal.fire({
+    title: "Ready to check out?",
+    text: "Please review your order details!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, check out"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      
+      Swal.fire({
+        title: "Thank you!",
+        text: "Your order has been processed.",
+        icon: "success"
+      });
+    }
+  });
+}
 
 export default CartPageReducer;

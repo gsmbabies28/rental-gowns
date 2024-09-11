@@ -28,7 +28,7 @@ export default function Layout() {
           setIsLogged(true);
         }
       )
-      .catch(error=>{
+      .catch(()=>{
         // console.log(error);
         setUser(defaultUser);
         setIsLogged(false);
@@ -44,7 +44,7 @@ export default function Layout() {
   
     }, [ getToken] );
 
-    // console.log(user);
+    console.log(user);
 
     return (
       <>

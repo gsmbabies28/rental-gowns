@@ -29,9 +29,11 @@ export const getUserDetails = async ( setToken ) => {
 
     // console.log(error.response.data)
 
-    if (error.response?.data?.msg === "Token expired") {
+    if (error.response?.status === 403 ) {
       console.warn("expired na ue!!!")
       localStorage.removeItem("token");
+      setToken(null);
+      
     } else {
       // console.error(error.response);
       console.error(error);

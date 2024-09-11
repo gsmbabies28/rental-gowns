@@ -53,7 +53,7 @@ const Cart = ({ product, handleRemove, changeQuantity } ) => {
                 </div>
                 <div className="justify-self-center">
                   <button type="button" onClick={() => handleRemove(product?._id)}>
-                    <IoTrashOutline />
+                    <IoTrashOutline title="delete" />
                   </button>
                 </div>
               </div>

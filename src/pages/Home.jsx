@@ -10,7 +10,7 @@ const Home = () => {
     <div id="main">
 
       <Body>
-          <Banner title="Worry no more, gowns at your door." text="Quality gowns and tuxedos" btnTxt="Rent now" />
+          <Banner title="Worry no more, gowns at your door." text="Quality gowns and tuxedos" btnTxt="Shop now" />
           <Featured />
       </Body>
  

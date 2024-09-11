@@ -1,17 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProducDetailsTable from "../components/utils/ProducDetailsTable";
-import { handleAddToCart } from "../functionsAndHandlers/ProductDetails";
 import UserContext from '../UseContext/UserContext'
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import axios from "axios";
+import { handleAddToCart } from "../functionsAndHandlers/ProductDetails";
 
 const ProductDetails = () => {
   const param = useParams();
   const [product, setProduct] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const { isLogged } = useContext(UserContext)
+  const { isLogged, setIsLogged } = useContext(UserContext);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
 
   useEffect(() => {
@@ -72,7 +73,8 @@ const ProductDetails = () => {
                 &#8369;{product.price}
               </span>
               <button
-                onClick={() => handleAddToCart(product._id, isLogged)}
+                onClick={() => handleAddToCart(product._id, isLogged, setIsLogged, setIsButtonDisabled)}
+                disabled = {isButtonDisabled}
                 className="flex ml-auto text-white bg-cyan-500 border-0 py-2 px-6 focus:outline-none hover:bg-cyan-600 rounded"
               >
                 Add to cart
