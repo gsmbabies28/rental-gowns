@@ -95,7 +95,7 @@ const CartPage = () => {
     return `${days}d ${hours}h ${minutes}m ${seconds}s`;
   };
 
-  // console.log(state);
+  console.log(state.productList);
 
   return (
     <div className="w-full max-screen-2xl p-5 bg-white static">
@@ -123,7 +123,12 @@ const CartPage = () => {
           {state.productList?.map((item) => (
             <Cart
               key={item?._id}
-              product={item}
+              name={item.name}
+              quantity={item.quantity}
+              price={item.price}
+              img={item.img}
+              color={item.color}
+              size={item.size}
               handleRemove={removeProduct}
               changeQuantity={changeQuantity}
             />

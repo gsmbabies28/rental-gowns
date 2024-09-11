@@ -2,10 +2,10 @@ import { useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
 
 
-const Cart = ({ product, handleRemove, changeQuantity } ) => {
-  const { _id, name, quantity, price, img, color, size } = product;
+const Cart = ({ name, quantity, price, img, color, size, handleRemove, changeQuantity } ) => {
+  // const { _id, name, quantity, price, color, size } = product;
   const subTotal = (price * quantity );
-  console.log(img);
+  // console.log(product);
   return (
     <div className="w-full h-full mt-5">
       <div id="product-list" className="space-y-5 mt-5">
@@ -15,7 +15,7 @@ const Cart = ({ product, handleRemove, changeQuantity } ) => {
               className="bg-fit"
               width={150}
               height={150}
-              src={`${import.meta.env.VITE_APP_API_URL}/images/${img}`}
+              src={`${import.meta.env.VITE_APP_API_URL}/images/`+img}
               alt='image'
             />
             <div id="description" className="hidden sm:hidden md:block">
