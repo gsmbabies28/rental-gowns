@@ -5,7 +5,7 @@ import { IoTrashOutline } from "react-icons/io5";
 const Cart = ({ product, handleRemove, changeQuantity } ) => {
   const { _id, name, quantity, price, img, color, size } = product;
   const subTotal = (price * quantity );
-  // console.log(product);
+  console.log(img);
   return (
     <div className="w-full h-full mt-5">
       <div id="product-list" className="space-y-5 mt-5">
