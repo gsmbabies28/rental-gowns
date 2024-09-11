@@ -30,6 +30,7 @@ const CartPage = () => {
   };
 
   const changeQuantity = (num, id, currentQuantity, operator) => {
+    console.log(id);
     dispatch({
       type: "changeQuantity",
       num: num,
@@ -94,7 +95,7 @@ const CartPage = () => {
     return `${days}d ${hours}h ${minutes}m ${seconds}s`;
   };
 
-  console.log(state);
+  // console.log(state);
 
   return (
     <div className="w-full max-screen-2xl p-5 bg-white static">

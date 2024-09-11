@@ -3,9 +3,9 @@ import { IoTrashOutline } from "react-icons/io5";
 
 
 const Cart = ({ product, handleRemove, changeQuantity } ) => {
-  const { quantity,price } = product;
+  const { _id, name, quantity, price, img, color, size } = product;
   const subTotal = (price * quantity );
-  console.log(product);
+  // console.log(product);
   return (
     <div className="w-full h-full mt-5">
       <div id="product-list" className="space-y-5 mt-5">
@@ -15,20 +15,20 @@ const Cart = ({ product, handleRemove, changeQuantity } ) => {
               className="bg-fit"
               width={150}
               height={150}
-              src={`${import.meta.env.VITE_APP_API_URL}/images/${product?.img}`}
+              src={`${import.meta.env.VITE_APP_API_URL}/images/${img}`}
               alt='image'
             />
             <div id="description" className="hidden sm:hidden md:block">
-              <p>{product?.name}</p>
+              <p>{name}</p>
               <p>Php {(price||0)}</p>
-              <p>Color: {product?.color}</p>
-              <p>Size: {product?.size}</p>
+              <p>Color: {color}</p>
+              <p>Size: {size}</p>
             </div>
           </div>
 
           <div className="sm:flex col-span-2 md:col-span-1 justify-self-start text-left space-y-3">
             <div id="description" className="md:hidden">
-              <p>{product?.name}</p>
+              <p>{name}</p>
               <p>Php {price||0}</p>
               <p>Color: brown</p>
               <p>Size: medium</p>
@@ -37,7 +37,7 @@ const Cart = ({ product, handleRemove, changeQuantity } ) => {
             <div className="flex items-center justify-between md:items-start space-x-2">
               <div className="flex items-baseline gap-4">
                 <div className="flex justify-between border-[1px] border-gray-600 px-2 py-1 w-full space-x-4">
-                  <button onClick={()=> changeQuantity(1,product._id, quantity, '-')}>
+                  <button onClick={()=> changeQuantity(1, _id, quantity, '-')}>
                     <span className="text-2xl">-</span>
                   </button>
                   <input
@@ -45,14 +45,14 @@ const Cart = ({ product, handleRemove, changeQuantity } ) => {
                     type="number"
                     className="text-center appearance-none form-input rounded border-0 w-full max-w-10"
                     value={quantity}
-                    onChange={e=>changeQuantity(e.target.value, product._id, quantity, 'input')}
+                    onChange={e=>changeQuantity(e.target.value, _id, quantity, 'input')}
                   />
-                  <button onClick={()=> changeQuantity(1,product._id, quantity, '+')}>
+                  <button onClick={()=> changeQuantity(1, _id, quantity, '+')}>
                     <span className="text-2xl">+</span>
                   </button>
                 </div>
                 <div className="justify-self-center">
-                  <button type="button" onClick={() => handleRemove(product?._id)}>
+                  <button type="button" onClick={() => handleRemove(_id)}>
                     <IoTrashOutline title="delete" />
                   </button>
                 </div>

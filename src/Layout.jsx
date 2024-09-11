@@ -44,7 +44,7 @@ export default function Layout() {
   
     }, [ getToken] );
 
-    console.log(user);
+    // console.log(user);
 
     return (
       <>
