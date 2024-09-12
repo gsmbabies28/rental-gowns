@@ -123,12 +123,7 @@ const CartPage = () => {
           {state.productList?.map((item) => (
             <Cart
               key={item?._id}
-              name={item.name}
-              quantity={item.quantity}
-              price={item.price}
-              img={item.img}
-              color={item.color}
-              size={item.size}
+              product= {item}
               handleRemove={removeProduct}
               changeQuantity={changeQuantity}
             />
