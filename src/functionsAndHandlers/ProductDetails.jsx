@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { addToCart } from "./AddToCart";
 
-export const handleAddToCart = (id, isLogged=false, setIsLogged, setIsButtonDisabled) => {
+export const handleAddToCart = (id, isLogged=false, setIsLogged, setIsButtonDisabled, setIsEmptyCart,setExpirationTime) => {
     const token = localStorage.getItem('token');
     setIsButtonDisabled(true);
     if(isLogged){
@@ -23,12 +23,14 @@ export const handleAddToCart = (id, isLogged=false, setIsLogged, setIsButtonDisa
         }).finally(()=>setIsButtonDisabled(false));
 
     } else {
-      addToCartOff(id);
+      addToCartOff(id, setExpirationTime);
       setIsButtonDisabled(false);
+      setIsEmptyCart(false);
+      setExpirationTime
     }
 };
 
-function addToCartOff (id) {
+function addToCartOff (id, setExpirationTime) {
   const currentTime = Date.now();
   const expirationTime = currentTime + 1 * 60 * 15000;
 
@@ -56,4 +58,5 @@ function addToCartOff (id) {
     showConfirmButton: false,
     timer: 1500
   });
+  setExpirationTime(expirationTime);
 }

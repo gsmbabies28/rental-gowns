@@ -2,8 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { addToCart } from "./AddToCart";
 
-export const handleLogin = async (e,navigate,userLogin,password, setToken) => {    
-    e.preventDefault();
+export const handleLogin = async (navigate,userLogin,password, setToken, msg="Login Success!") => {    
     
     const data = {
         email: userLogin,
@@ -25,7 +24,7 @@ export const handleLogin = async (e,navigate,userLogin,password, setToken) => {
         checkLocalStorage.length >0 && addToCart(token, true);
         
         const success = await Swal.fire({
-            title: "Login sucess!",
+            title: msg,
             text: "Welcome User",
             icon: "success"
         });

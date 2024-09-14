@@ -5,8 +5,8 @@ import React, {
   useEffect,
   useMemo,
   useReducer,
-  useState,
   useContext,
+  useLayoutEffect,
 } from "react";
 import CartPageReducer, {
   fetchProductData,
@@ -17,20 +17,15 @@ import UserContext, {defaultUser} from "../UseContext/UserContext";
 
 const CartPage = () => {
   //Variables
-  const [state, dispatch] = useReducer(CartPageReducer, initialCartItems());
-  const expirationTime = new Date(JSON.parse(localStorage.getItem("time")));
-  const [remainingTime, setRemainingTime] = useState(
-    expirationTime - Date.now()
-  );
-  const { isLogged, setIsLogged, setUser, user  } = useContext(UserContext);
-
+  const [state, dispatch] = useReducer(CartPageReducer, initialCartItems);
+  
+  const { isLogged, setIsLogged, setUser, user, setIsEmptyCart,remainingTime } = useContext(UserContext);
   //Dispatch reducers
   const removeProduct = (id) => {
     dispatch({ type: "removeItem", id: id, isLogged: isLogged});
   };
 
   const changeQuantity = (num, id, currentQuantity, operator) => {
-    console.log(id);
     dispatch({
       type: "changeQuantity",
       num: num,
@@ -55,50 +50,39 @@ const CartPage = () => {
       });
   }, [ isLogged, state.token ] );
 
-  //when the user is not logged in a timer will show for cart items
-  useEffect(() => {
-    if (isLogged) {
-      return;
+  useEffect(()=>{
+    if(state.productList?.length > 0)  {
+      setIsEmptyCart(false);
+    } 
+
+    if(state.productList?.length <= 0){
+      setIsEmptyCart(true)
     }
-    const timer = setInterval(() => {
-      const now = Date.now();
-      const timeLeft = expirationTime - now;
 
-      if (timeLeft <= 0) {
-        clearInterval(timer);
-        setRemainingTime(0);
-        dispatch({ type: "setEmpty" });
-      } else {
-        setRemainingTime(timeLeft);
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-
-  }, [isLogged, state.cartItems]);
+  },[state.productList])
 
   //totaling price
   const totalPrice = useMemo(() => {
     const totalPrice = state.productList?.reduce(
-      (acc, product) => acc + product?.price * product?.quantity,
+      (acc, product) => acc + product.productID.price * product.quantity,
       0
     );
     return totalPrice;
   }, [state.productList]);
 
-  //Timer
-  const formatTime = (ms) => {
-    const seconds = Math.floor((ms / 1000) % 60);
-    const minutes = Math.floor((ms / (1000 * 60)) % 60);
-    const hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
-    const days = Math.floor(ms / (1000 * 60 * 60 * 24));
-    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  };
-
-  console.log(state.productList);
+  useLayoutEffect(()=>{
+    if(remainingTime<=0){
+      dispatch({ type: "setEmpty" });
+      setIsEmptyCart(true);
+    } else {
+      return;
+    }
+  },[remainingTime])
+  
+  console.log(remainingTime);
 
   return (
-    <div className="w-full max-screen-2xl p-5 bg-white static">
+    <div className="w-full max-screen-2xl p-5 bg-white">
       {state.productList?.length > 0 ? (
         <div className="bg-white-200 mt-6 sm:mt-12 mx-auto text-center w-full max-w-screen-lg sm:p-5">
           <div className="flex justify-between align items-end">
@@ -122,7 +106,7 @@ const CartPage = () => {
 
           {state.productList?.map((item) => (
             <Cart
-              key={item?._id}
+              key={item.productID?._id}
               product= {item}
               handleRemove={removeProduct}
               changeQuantity={changeQuantity}
@@ -168,12 +152,6 @@ const CartPage = () => {
         <h1 className="text-5xl text-center mt-5">Your cart is empty</h1>
       )}
       <EmptyCart />
-      {state.productList?.length > 0 && !isLogged && (
-        <div className="absolute bottom-0 right-[60px] p-3 bg-cyan-200">
-          {" "}
-          Expires in {formatTime(remainingTime)}
-        </div>
-      )}
     </div>
   );
 };

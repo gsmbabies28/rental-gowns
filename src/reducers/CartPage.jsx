@@ -1,13 +1,10 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export const initialCartItems = () => {
-  return {
-    cartItems: JSON.parse(localStorage.getItem('sunflower_cartItems')),
+export const initialCartItems = {
     productList: [],
     note: "",
     token: localStorage.getItem("token")
-  };
 };
 
 //fetch cart user when logged or fetch each product when not logged
@@ -58,11 +55,17 @@ export const fetchProductData = async (isLogged,token) => {
 
 //Reducer for cart page
 const CartPageReducer = (state, action) => {
-
+  let cartItems =  JSON.parse(localStorage.getItem('sunflower_cartItems'))
+  
   switch (action.type) {
     case "addProducts":
       return { ...state, productList: action.products };
     
+    case "setEmpty":
+      localStorage.removeItem("sunflower_cartItems");
+      localStorage.removeItem("time");
+      return { ...state, productList: [] };
+  
     case "removeItem":
       if (action.isLogged) {
         // console.log(token);
@@ -79,35 +82,29 @@ const CartPageReducer = (state, action) => {
         return {
           ...state,
           productList: state.productList.filter(
-            (item) => item._id !== action.id
+            (item) => item.productID._id !== action.id
           ),
         };
       } else {
-        delete state.cartItems[action.id];
+        Object.keys(cartItems)?.length === 0 && (localStorage.removeItem('time'));
+        delete cartItems[action.id];
         localStorage.setItem(
           "sunflower_cartItems",
-          JSON.stringify(state.cartItems)
+          JSON.stringify(cartItems)
         );
         return {
           ...state,
           productList: state.productList.filter(
-            (item) => item._id !== action.id
+            (item) => item.productID._id !== action.id
           ),
         };
       }
     //end of remove product item
-
-    
-    case "setEmpty":
-      localStorage.removeItem("sunflower_cartItems");
-      localStorage.removeItem("time");
-      return { ...state, productList: [] };
-
+      
     case "changeQuantity":
       const quantity = Number(action.num);
       let updatedQuantity = action.currentQuantity;
      
-
       switch (action.operator) {
         case "input":
           if (quantity <= 0) {
@@ -133,8 +130,8 @@ const CartPageReducer = (state, action) => {
       }
       
       const updatedItems = state?.productList?.map((elem) => {
-        if (elem._id === action.id) {
-          !action.isLogged && (state.cartItems[action.id] = Number(updatedQuantity));
+        if (elem.productID._id === action.id) {
+          !action.isLogged && (cartItems[action.id] = Number(updatedQuantity));
           let updatedItems = { ...elem, quantity: updatedQuantity };
           return updatedItems;
         } else {
@@ -158,7 +155,7 @@ const CartPageReducer = (state, action) => {
         console.log(state.cartItems);
         localStorage.setItem(
           "sunflower_cartItems",
-          JSON.stringify(state.cartItems)
+          JSON.stringify(cartItems)
         );
       }
 

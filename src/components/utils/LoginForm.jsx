@@ -14,7 +14,10 @@ const LoginForm = () => {
   return (
       <form 
         className="mx-auto my-12 space-y-4 w-full max-w-96"
-        onSubmit={e=>handleLogin(e,navigate, userLogin, password,setToken)}
+        onSubmit={e=>{
+          e.preventDefault();
+          handleLogin(navigate, userLogin, password,setToken)
+        }}
       >
         <h1 className="text-5xl">Login</h1>
         <div className="mt-2 space-y-2">

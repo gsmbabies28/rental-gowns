@@ -10,7 +10,7 @@ const ProducDetailsTable = ({ details }) => {
         </tr>
     )
   }
-  console.log(detailsTable);
+  // console.log(detailsTable);
   return (
     <table className="table-auto">
       <thead className="p-2">

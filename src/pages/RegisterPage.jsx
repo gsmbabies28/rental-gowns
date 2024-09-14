@@ -2,7 +2,7 @@ import Button from "../components/utils/Button";
 import { useContext, useReducer,useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate,Navigate } from "react-router-dom";
-import {handleSubmitForm} from '../functionsAndHandlers/Registration';
+// import {handleSubmitForm} from '../functionsAndHandlers/Registration';
 import { initialState, RegistrationReducer } from "../reducers/Registration";
 import UserContext from "../UseContext/UserContext";
 
@@ -11,19 +11,25 @@ const RegisterPage = () => {
   let isPasswordMatch = state.password === state.confirmPassword;
   const [isEmailInUse, setIsEmailInUse] = useState(false);
   const navigate = useNavigate(); 
-  const { isLogged } = useContext(UserContext);
+  const { isLogged,setToken } = useContext(UserContext);
   
   const handleStateFormInput = (value, prop) => {
     dispatch({ type: "update", propName: prop, propValue: value });
   };
-  
+
+  const handleSubmitForm = (e) => {
+     e.preventDefault();
+     dispatch({ type: "register", isPassMatch: isPasswordMatch, navigate:navigate, setIsEmailInUse:setIsEmailInUse, setToken:setToken })
+  }
+
+  // console.log(state);
   return (
     <>
       {isLogged && <Navigate to="/account" replace={true} />}
       <div id="registration-page" className="mx-auto text-center w-full">
         <form
           className="mx-auto my-12 space-y-4 max-w-96 p-3 md:p-1"
-          onSubmit={(e) => handleSubmitForm(e,isPasswordMatch,navigate,setIsEmailInUse,state)}
+          onSubmit={(e) => handleSubmitForm(e)}
         >
           <h1 className="text-5xl">Create account</h1>
 
