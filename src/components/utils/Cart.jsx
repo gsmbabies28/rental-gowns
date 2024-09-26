@@ -3,10 +3,10 @@ import { IoTrashOutline } from "react-icons/io5";
 
 
 const Cart = ({ product, handleRemove, changeQuantity } ) => {
+
   const { productID:{_id, name, img, price, color, size}, quantity } = product;
   const subTotal = (price * quantity );
   // console.log(product);
-  // console.log(price)
   return (
     <div className="w-full h-full mt-5">
       <div id="product-list" className="space-y-5 mt-5">

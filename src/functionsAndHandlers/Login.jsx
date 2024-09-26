@@ -15,7 +15,7 @@ export const handleLogin = async (navigate,userLogin,password, setToken, msg="Lo
             `${import.meta.env.VITE_APP_API_URL}/users/login`,
             data
         );
-
+        
         const { token } = response.data;
 
         //check the localstorage for temporary cart and transfer it to the user cart

@@ -79,10 +79,10 @@ export default function Layout() {
       return `${days}d ${hours}h ${minutes}m ${seconds}s`;
     };
     
-    // console.log(user);
+    // console.log(isEmptyCart);
 
     return (
-      <div className="container w-full">
+      <>
         <UserContextProvider value={{user, isLoading,isLogged, getToken, remainingTime, setIsEmptyCart, setToken, setUser, setIsLogged,setExpirationTime}}>
           <Header>
             <AnnouncementBar text="Discounted Price!!!!" />
@@ -97,9 +97,9 @@ export default function Layout() {
         {(!isEmptyCart && !isLogged) && (
           <div className="w-1/6 sticky bottom-0 ml-auto py-1 text-center text-cyan-900 bg-cyan-200">
             {" "}
-            Expires in {formatTime(remainingTime)}
+            Items Expires in {formatTime(remainingTime)}
           </div>
         )}
-      </div>
+      </>
     );
   }

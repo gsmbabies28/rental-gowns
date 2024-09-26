@@ -3,24 +3,25 @@ import Swal from "sweetalert2";
 
 export const initialCartItems = {
     productList: [],
-    note: "",
-    token: localStorage.getItem("token")
+    note: ""
 };
 
 //fetch cart user when logged or fetch each product when not logged
-export const fetchProductData = async (isLogged,token) => {
+export const fetchProductData = async (isLogged) => {
+
   try {
     let res;
     if (isLogged) {
       res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/users/cart`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
-
-      if (res.status !== 200)
+      
+      if (res.status !== 200){
         throw new Error("Something went wrong fetching product!");
+      } 
 
       return res.data.msg;
 
@@ -49,7 +50,7 @@ export const fetchProductData = async (isLogged,token) => {
   } catch (error) {
     // console.error(error);
     // console.warn("hahah")
-    throw error;
+    throw new Error(error);
   }
 };
 

@@ -18,8 +18,8 @@ import UserContext, {defaultUser} from "../UseContext/UserContext";
 const CartPage = () => {
   //Variables
   const [state, dispatch] = useReducer(CartPageReducer, initialCartItems);
-  
   const { isLogged, setIsLogged, setUser, user, setIsEmptyCart,remainingTime } = useContext(UserContext);
+  
   //Dispatch reducers
   const removeProduct = (id) => {
     dispatch({ type: "removeItem", id: id, isLogged: isLogged});
@@ -39,13 +39,17 @@ const CartPage = () => {
   //useEffect
   //this will fetch the data in cart items in user cart or in localstoragesdfgs
   useEffect(() => {
-    fetchProductData(isLogged, state.token)
-      .then((res) => dispatch({ type: "addProducts", products: res }))
+    fetchProductData(isLogged)
+      .then((res) => {
+        // console.log(res);
+        dispatch({ type: "addProducts", products: res })
+      })
       .catch((error) => {
         // console.log(error);
         if(error.response?.status === 403 ){
           setUser(defaultUser);
           setIsLogged(false);
+          localStorage.removeItem('token');
         }
       });
   }, [ isLogged, state.token ] );
@@ -64,7 +68,7 @@ const CartPage = () => {
   //totaling price
   const totalPrice = useMemo(() => {
     const totalPrice = state.productList?.reduce(
-      (acc, product) => acc + product.productID.price * product.quantity,
+      (acc, product) => acc + product.productID?.price * product.quantity,
       0
     );
     return totalPrice;
@@ -79,7 +83,7 @@ const CartPage = () => {
     }
   },[remainingTime])
   
-  console.log(remainingTime);
+  // console.log(state.productList);
 
   return (
     <div className="w-full max-screen-2xl p-5 bg-white">
@@ -102,7 +106,7 @@ const CartPage = () => {
             <span className="w-full text-right">TOTAL</span>
           </div>
 
-          <hr />
+          <hr /> 
 
           {state.productList?.map((item) => (
             <Cart
